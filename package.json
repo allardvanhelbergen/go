@@ -15,9 +15,13 @@
     "body-parser": "^1.9.1",
     "express": "^4.1.0",
     "express-handlebars": "^1.0.1",
+    "googleapis": "^1.0.21",
     "method-override": "^2.3.0",
     "mongoose": "^3.8.18",
     "morgan": "^1.4.1",
+    "passport": "^0.2.1",
+    "passport-google": "^0.3.0",
+    "passport-google-oauth": "^0.1.5",
     "serve-favicon": "^2.1.6"
   },
   "devDependencies": {

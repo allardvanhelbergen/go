@@ -22,6 +22,9 @@ exports.notFound = function(req, res) {
  */
 exports.redirect = function(req, res) {
     console.log('Redirecting:', req.goLink);
+    if (!req.goLink) {
+        return;
+    }
     // TODO(allard): Analytics would go here.
     res.redirect(req.goLink.longUri);
 };

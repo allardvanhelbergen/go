@@ -31,10 +31,42 @@ var morgan = require('morgan');
 var path = require('path');
 var router = require('./controllers');
 
+var session = require('express-session');
+var passport = require('passport');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
+
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+    done(null, obj);
+});
+
+passport.use(new GoogleStrategy({
+        clientID: '<my-clientID>',
+        clientSecret: '<my-clientSecret>',
+        callbackURL: "http://localhost:3000/auth/google/callback"
+    },
+    function(accessToken, refreshToken, profile, done) {
+        if(profile._json.hd === "brandwatch.com"){
+            process.nextTick(function () {
+                return done(null, profile);
+            });
+        } else {
+            done(new Error("Invalid host domain"));
+        }
+
+    }
+));
 
 // Initialise the app.
 var app = express();
 
+app.use(session({ secret: 'keyboard cat' }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Set environment variables - ALL
 app.set('port', process.env.PORT || config.http.port);
@@ -66,16 +98,13 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 // Set Routes.
 app.use(router);
-
 
 // Set post-routing Middleware.
 app.use(function(req, res) {
     res.status(404).render('not-found');
 });
-
 
 // Run the server.
 app.listen(app.get('port'), function() {
