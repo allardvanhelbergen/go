@@ -5,6 +5,8 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
 
     grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+
         // Configure all paths.
         paths: {
             js: [
@@ -22,7 +24,8 @@ module.exports = function(grunt) {
         jshint: {
             all: '<%= paths.js %>',
             options: {
-                jshintrc: true
+                jshintrc: true,
+                reporter: require('jshint-stylish')
             }
         },
         jscs: {
