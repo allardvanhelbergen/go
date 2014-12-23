@@ -1,16 +1,21 @@
 'use strict';
 
+
 var express = require('express');
+var favicon = require('serve-favicon');
+var passport = require('passport');
+var path = require('path');
 var router = express.Router();
+
 
 // Models
 var GoLinkModel = require('../models/goLinkModel');
 
-// Controllers
-var indexController = require('./indexController');
-var goLinkController = require('./goLinkController');
 
-var passport = require('passport');
+// Controllers
+var indexController = require('../controllers/indexController');
+var goLinkController = require('../controllers/goLinkController');
+
 
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) { return next(); }
@@ -30,6 +35,9 @@ router.param('shortUri', function(req, res, next, shortUri) {
     });
 });
 
+// Set pre-route Middleware.
+router.use(favicon(path.join('.', 'public', 'favicon.ico')));
+router.use(express.static(path.join('.', 'public')));
 
 // Routes
 router.get('/', ensureAuthenticated, indexController.index);
@@ -49,6 +57,11 @@ router.get('/auth/google',
     });
 router.get('/auth/google/callback', passport.authenticate('google', {}), function(req, res) {
     res.redirect('/');
+});
+
+// Post-routing Middleware. Will always be invoked if non of the above routes catch the request.
+router.use(function(req, res) {
+    res.status(404).render('not-found');
 });
 
 module.exports = router;

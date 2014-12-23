@@ -23,13 +23,12 @@ var bodyParser = require('body-parser');
 var config = require('./config');
 var exphbs = require('express-handlebars');
 var express = require('express');
-var favicon = require('serve-favicon');
 var fs = require('fs');
 // var methodOverride = require('method-override');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
 var path = require('path');
-var router = require('./controllers');
+var router = require('./routes');
 
 var session = require('express-session');
 var passport = require('passport');
@@ -94,17 +93,10 @@ app.use(morgan('dev'));
 
 
 // Set pre-route Middleware.
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Set Routes.
 app.use(router);
-
-// Set post-routing Middleware.
-app.use(function(req, res) {
-    res.status(404).render('not-found');
-});
 
 // Run the server.
 app.listen(app.get('port'), function() {
