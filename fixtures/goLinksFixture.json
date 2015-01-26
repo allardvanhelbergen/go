@@ -2,101 +2,101 @@
     {
         "shortUri" : "g",
         "longUri" : "https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=once+in+a+blue+moon",
-        "owner" : "Allard"
+        "owner" : "allard"
     },
     {
         "shortUri" : "bw",
         "longUri" : "http://www.brandwatch.com",
-        "owner" : "Giles"
+        "owner" : "giles"
     },
     {
         "shortUri" : "fb",
         "longUri" : "http://www.postrandomonium.com/",
-        "owner" : "Dan"
+        "owner" : "dan"
     },
     {
         "shortUri" : "suchwow",
         "longUri" : "http://dogr.io/wowgo/suchlongurl/nowmuchshort/amaze.png",
-        "owner" : "Antonio"
+        "owner" : "antonio"
     },
     {
         "shortUri" : "canvas",
         "longUri" : "http://youtu.be/hFgtIziShmc",
-        "owner" : "Dan"
+        "owner" : "dan"
     },
     {
         "shortUri" : "worse",
         "longUri" : "http://youtu.be/78XrI_2bPVA",
-        "owner" : "Alena"
+        "owner" : "alena"
     },
     {
         "shortUri" : "horse",
         "longUri" : "https://twitter.com/horse_js",
-        "owner" : "Allard"
+        "owner" : "allard"
     },
     {
         "shortUri" : "gh",
         "longUri" : "https://github.com/",
-        "owner" : "Giles"
+        "owner" : "giles"
     },
     {
         "shortUri" : "wat",
         "longUri" : "https://www.youtube.com/watch?v=eVpVHGiELf8",
-        "owner" : "Dan"
+        "owner" : "dan"
     },
     {
         "shortUri" : "vk",
         "longUri" : "http://www.vk.com",
-        "owner" : "Antonio"
+        "owner" : "antonio"
     },
     {
         "shortUri" : "yo",
         "longUri" : "http://www.quickmeme.com/meme/355uo5",
-        "owner" : "Dan"
+        "owner" : "dan"
     },
     {
         "shortUri" : "xe",
         "longUri" : "http://www.explainxkcd.com/wiki/index.php/Main_Page",
-        "owner" : "Alena"
+        "owner" : "alena"
     },
     {
         "shortUri" : "x",
         "longUri" : "http://c.xkcd.com/random/comic/",
-        "owner" : "Allard"
+        "owner" : "allard"
     },
     {
         "shortUri" : "dog",
         "longUri" : "http://www.pinterest.com/pin/317081629986027751/",
-        "owner" : "Giles"
+        "owner" : "giles"
     },
     {
         "shortUri" : "gemini",
         "longUri" : "http://instagram.com/p/rsC4FTl1NL/?modal=true",
-        "owner" : "Dan"
+        "owner" : "dan"
     },
     {
         "shortUri" : "origami",
         "longUri" : "https://www.flickr.com/photos/38421927@N03/galleries/72157622681814617",
-        "owner" : "Antonio"
+        "owner" : "antonio"
     },
     {
         "shortUri" : "epicasianguy",
         "longUri" : "http://9gag.com/gag/ay7bP3V/epic-asian-guy-drawing",
-        "owner" : "Dan"
+        "owner" : "dan"
     },
     {
         "shortUri" : "americanfootball",
         "longUri" : "http://www.memecenter.com/fun/100468/Epic-Football-Gif",
-        "owner" : "Alena"
+        "owner" : "alena"
     },
     {
         "shortUri" : "nasa",
         "longUri" : "http://www.nasa.gov/externalflash/photos/index.html",
-        "owner" : "Allard"
+        "owner" : "allard"
     },
     {
         "shortUri" : "hamsterdance",
         "longUri" : "http://youtu.be/6WpMlwVwydo",
-        "owner" : "Alena"
+        "owner" : "alena"
     }
 ]
