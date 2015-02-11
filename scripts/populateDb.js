@@ -27,9 +27,10 @@ mongoose.connect('mongodb://localhost:27017/go?auto_reconnect');
 var saveUsers = function() {
     console.log('Saving users...');
     var userCount = 0;
+    var userModel;
 
     return Q.all(users.map(function(user) {
-        var userModel = new UserModel({
+        userModel = new UserModel({
             name: user.name,
             email: user.email
         });
@@ -56,13 +57,19 @@ var saveLinks = function(docs) {
 
     // Clean up the wrapping from the promises.
     var users = [];
+    var owner;
+
+    if (!docs) {
+        return new Error('No user docs array returned');
+    }
+
     docs.forEach(function(doc) {
         users.push(doc[0]);
-    })
+    });
 
     console.log('Saving links...');
     return Q.all(goLinks.map(function(goLink, i) {
-        var owner = users.filter(function(user) {
+        owner = users.filter(function(user) {
             return user.email === goLink.owner;
         })[0];  // Take the first of the array as there should only be one element.
 
