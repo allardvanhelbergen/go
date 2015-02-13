@@ -7,6 +7,7 @@
 'use strict';
 
 
+var _ = require('lodash');
 var Q = require('q');
 var mongoose = require('mongoose');
 
@@ -26,73 +27,35 @@ mongoose.connect('mongodb://localhost:27017/go?auto_reconnect');
 
 var saveUsers = function() {
     console.log('Saving users...');
-    var userCount = 0;
-    var userModel;
 
-    return Q.all(users.map(function(user) {
-        userModel = new UserModel({
-            name: user.name,
-            email: user.email
-        });
-
-        return Q.npost(userModel, 'save')
-        .catch(function(err) {
-            console.error('Failed to save user: %j', userModel);
-            console.error(err);
-            process.exit(-1);
-        })
+    return Q.npost(UserModel, 'create', users)
         .tap(function() {
-            ++userCount;
-            console.log('Saved user %d:', userCount, userModel.name);
+            console.log('... Done!');
         });
-    }))
-    .tap(function() {
-        console.log('... Done!');
-    });
 };
 
 
-var saveLinks = function(docs) {
-    var goLinkCount = 0;
-
-    // Clean up the wrapping from the promises.
-    var users = [];
+var saveLinks = function(users) {
+    console.log('Saving links...');
     var owner;
 
-    if (!docs) {
+    if (!users) {
         return new Error('No user docs array returned');
     }
 
-    docs.forEach(function(doc) {
-        users.push(doc[0]);
-    });
-
-    console.log('Saving links...');
-    return Q.all(goLinks.map(function(goLink, i) {
-        owner = users.filter(function(user) {
+    // Add the correct user id to each go link.
+    goLinks.forEach(function(goLink, i) {
+        owner = _.find(users, function(user) {
             return user.email === goLink.owner;
-        })[0];  // Take the first of the array as there should only be one element.
+        });
 
-        var goLinkModel = new GoLinkModel({
-            shortUri: goLink.shortUri,
-            longUri: goLink.longUri,
-            ownerId: owner._id
-        })
-
-        return Q.npost(goLinkModel, 'save')
-        .catch(function(err) {
-            console.error('Failed to save goLink: %j', goLinkModel);
-            console.error(err);
-            process.exit(-1);
-        })
-        .tap(function() {
-            ++goLinkCount;
-            console.log('Saved goLink nr %d:', goLinkCount, goLinkModel.shortUri);
-        })
-    }))
-    .tap(function() {
-        console.log('... Done!')
+        goLink.owner = owner._id;
     });
+
+    return Q.npost(GoLinkModel, 'create', goLinks)
+        .tap(function() {
+            console.log('... Done!');
+        });
 };
 
 
@@ -100,7 +63,11 @@ var saveLinks = function(docs) {
 console.log('Starting to populate DB');
 saveUsers()
     .then(saveLinks)
+    .catch(function(err) {
+        console.error('Failed to save:', err);
+        return process.exit(-1);
+    })
     .done(function() {
-        console.log('Done populating DB!')
+        console.log('Done populating DB!');
         return process.exit(0);
     });
