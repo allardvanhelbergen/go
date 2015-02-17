@@ -21,73 +21,26 @@ exports.findByShortUri = function(req, res) {
     res.json(req.goLink);
 };
 
-// router.post('/go-link', goLink.add);
-// router.post('/go-link', function(req, res) {
-//     // Create a new link
-//     new GoLinkModel({
-//         shortUri: req.body.shortUri,
-//         longUri: req.body.longUri
-//     }).save(function(err, docs) {
-//         if (err) {
-//             res.json(err);
-//         }
-//         res.redirect('/');
-//     });
-// });
-
 
 /**
  * POST: Create a submitted Go link.
  */
-exports.add = function(req, res, next) {
+exports.create = function(req, res, next) {
     if (!req.body || !req.body.longUri || !req.body.shortUri) {
         return next(new Error('No URL data provided.'));
     }
 
-    var longUri = req.body.longUri;
-    var shortUri = req.body.shortUri;
-
-    req.db.links.save({
-        longUri: longUri,
-        shortUri: shortUri,
-        owner: 'unknown',
-        follows: []
+    // TODO(allard): Add the owner ID after we've figured authentication out.
+    GoLinkModel.create({
+        longUri: req.body.longUri,
+        shortUri: req.body.shortUri
+        // owner: user._id
     }, function(err, link) {
         if (err) {
             return next(err);
         }
 
-        if (!link) {
-            return next(new Error('Failed to save.'));
-        }
-
-        console.info('Added %s with id=%s', link.shortUri, link._id);
+        console.info('Added goLink %j', link);
         res.redirect('/');
     });
-};
-
-
-/**
- * DEL: Delete a Go link.
- */
-exports.delete = function(req, res, next) {
-    req.db.links.removeById(req.link._id, function(err, count) {
-        if (err) {
-            return next(err);
-        }
-        if (count !== 1) {
-            return next(new Error('Deletion went wrong.'));
-        }
-
-        console.info('Deleted link %s with id=%s.', req.link.shortUri, req.link._id);
-        res.redirect('/');
-    });
-};
-
-
-/**
- * GET: Sucess page after creating a Go link.
- */
-exports.created = function(req, res, next) {
-    res.render('created');
 };
