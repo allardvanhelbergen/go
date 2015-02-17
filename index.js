@@ -49,12 +49,12 @@ passport.use(new GoogleStrategy({
         callbackURL: "http://localhost:3000/auth/google/callback"
     },
     function(accessToken, refreshToken, profile, done) {
-        if(profile._json.hd === "brandwatch.com"){
+        if(profile._json.hd === 'brandwatch.com'){
             process.nextTick(function () {
                 return done(null, profile);
             });
         } else {
-            done(new Error("Invalid host domain"));
+            done(new Error('Invalid host domain'));
         }
 
     }
