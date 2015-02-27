@@ -26,14 +26,13 @@ var exphbs = require('express-handlebars');
 var express = require('express');
 var fs = require('fs');
 // var methodOverride = require('method-override');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var mongoose = require('mongoose');
 var morgan = require('morgan');
+var passport = require('passport');
 var path = require('path');
 var router = require('./routes');
-
 var session = require('express-session');
-var passport = require('passport');
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 
 passport.serializeUser(function(user, done) {
@@ -69,19 +68,15 @@ mongoose.connect(config.mongodb.uri);
 // Initialise the app.
 var app = express();
 
-// Set environment variables - ALL
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));  //
+app.set('view engine', 'handlebars');
 app.set('port', process.env.PORT || config.http.port);
 
-// Set view engine.
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
 
-app.use(session({ secret: 'keyboard cat' }));
+app.use(morgan('dev'));  // Logging
+app.use(session({ secret: 'keyboard cat' }));  // Auth
 app.use(passport.initialize());
 app.use(passport.session());
-
-// Set logging.
-app.use(morgan('dev'));
 
 // Set envirionment variables - DEV
 if (process.env.NODE_ENV === 'development') {
@@ -93,11 +88,9 @@ if (process.env.NODE_ENV === 'development') {
 //     app.enable('view cache');
 // }
 
-// Set pre-route Middleware.
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(router);  // Routes
 
-// Set Routes.
-app.use(router);
 
 // Run the server.
 app.listen(app.get('port'), function() {

@@ -8,7 +8,8 @@ var GoLinkSchema = new mongoose.Schema({
     shortUri: {
         type: String,
         trim: true,
-        required: true
+        required: true,
+        unique: true
     },
     longUri: {
         type: String,
