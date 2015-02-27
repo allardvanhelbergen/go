@@ -21,6 +21,7 @@
 // Module dependencies.
 var bodyParser = require('body-parser');
 var config = require('./config');
+// var errorhandler = ('errorhandler');
 var exphbs = require('express-handlebars');
 var express = require('express');
 var fs = require('fs');
@@ -82,12 +83,12 @@ app.set('view engine', 'handlebars');
 app.use(morgan('dev'));
 
 // Set envirionment variables - DEV
-// if ('development' === app.get('env')) {
-//     app.use(express.errorHandler());
-// }
+if (process.env.NODE_ENV === 'development') {
+    app.use(errorhandler());
+}
 
 // Set envirionment variables - PROD
-// if ('production' === app.get('env')) {
+// if (app.get('env') === 'production') {
 //     app.enable('view cache');
 // }
 
