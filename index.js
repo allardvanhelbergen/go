@@ -61,23 +61,24 @@ passport.use(new GoogleStrategy({
     }
 ));
 
-// Initialise the app.
-var app = express();
-
-app.use(session({ secret: 'keyboard cat' }));
-app.use(passport.initialize());
-app.use(passport.session());
-
-// Set environment variables - ALL
-app.set('port', process.env.PORT || config.http.port);
 
 // Set database.
 mongoose.connect(config.mongodb.uri);
 
 
+// Initialise the app.
+var app = express();
+
+// Set environment variables - ALL
+app.set('port', process.env.PORT || config.http.port);
+
 // Set view engine.
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
+
+app.use(session({ secret: 'keyboard cat' }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Set logging.
 app.use(morgan('dev'));
@@ -91,7 +92,6 @@ if (process.env.NODE_ENV === 'development') {
 // if (app.get('env') === 'production') {
 //     app.enable('view cache');
 // }
-
 
 // Set pre-route Middleware.
 app.use(bodyParser.urlencoded({extended: false}));
