@@ -33,7 +33,8 @@ exports.create = function(req, res, next) {
     // TODO(allard): Add the owner ID after we've figured authentication out.
     GoLinkModel.create({
         longUri: req.body.longUri,
-        shortUri: req.body.shortUri
+        shortUri: req.body.shortUri,
+        ownerEmail: req.user._json.email
         // owner: user._id
     }, function(err, link) {
         if (err) {

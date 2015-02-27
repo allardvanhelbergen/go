@@ -15,6 +15,11 @@ var GoLinkSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
+    ownerEmail: {
+        type: String,
+        default: null,
+        trim: true
+    },
     ownerId: {
         type: mongoose.Schema.Types.ObjectId,
         default: null,
