@@ -5,7 +5,7 @@
  * GET: the home page.
  */
 exports.index = function(req, res) {
-    res.render('index');
+    res.render('index', {user: {firstName: req.user.name.givenName, picture: req.user._json.picture}});
 };
 
 

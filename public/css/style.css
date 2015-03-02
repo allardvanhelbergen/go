@@ -1,0 +1,10 @@
+
+.navbar-nav > li > a.navbar-avatar-link {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.navbar-avatar-image {
+    width: 30px;
+    height: 30px;
+}

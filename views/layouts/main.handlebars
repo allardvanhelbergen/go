@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 
     <title>Go/ - The Brandwatch URL Shortener</title>
 </head>
@@ -14,6 +15,24 @@
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">Go/</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="navbar-avatar-link" data-toggle="dropdown">
+                            <img class="navbar-avatar-image img-circle" src="{{user.picture}}" alt="Oooooh, handsome!">
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-log-out"></span>
+                                    Log out
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -50,5 +69,7 @@
         ga('create', 'UA-416515-32', 'auto');
         ga('send', 'pageview');
     </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </body>
 </html>
