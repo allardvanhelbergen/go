@@ -2,7 +2,6 @@
 
 
 var express = require('express');
-var favicon = require('serve-favicon');
 var passport = require('passport');
 var path = require('path');
 var router = express.Router();
@@ -37,10 +36,6 @@ router.param('shortUri', function(req, res, next, shortUri) {
         next();
     });
 });
-
-// Set pre-route Middleware.
-router.use(favicon(path.join('.', 'public', 'favicon.ico')));
-router.use(express.static(path.join('.', 'public')));
 
 // Google OAuth routes.
 router.get(
