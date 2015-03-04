@@ -38,6 +38,7 @@ router.param('shortUri', function(req, res, next, shortUri) {
 });
 
 // Google OAuth routes.
+// TODO(allard): Put all of these into an auth controller
 router.get(
     '/auth/google',
     passport.authenticate(
@@ -59,9 +60,14 @@ router.get(
         res.redirect('/');
     }
 );
+router.get('/auth/logout', function(req, res){
+    req.logout();
+    req.session.destroy();
+    res.redirect('/');
+});
 
 // Go Link Controllers
-router.get('/', ensureAuthenticated, indexController.index);
+router.get('/', indexController.index);
 router.get('/go-link', ensureAuthenticated, goLinkController.findAll);
 router.get('/go-link/:shortUri', ensureAuthenticated, goLinkController.findByShortUri);
 router.post('/go-link', ensureAuthenticated, goLinkController.create);
