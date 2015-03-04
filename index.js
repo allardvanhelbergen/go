@@ -50,8 +50,8 @@ passport.use(new GoogleStrategy({
         callbackURL: "http://localhost:3000/auth/google/callback"
     },
     function(accessToken, refreshToken, profile, done) {
-        if(profile._json.hd === 'brandwatch.com'){
-            process.nextTick(function () {
+        if (profile._json.hd === 'brandwatch.com') {
+            process.nextTick(function() {
                 return done(null, profile);
             });
         } else {
@@ -79,7 +79,7 @@ app.use(morgan('dev'));  // Logging
 app.use(favicon(path.join('.', 'public', 'favicon.ico')));
 app.use(express.static(path.join('.', 'public')));
 // TODO(allard); Does this need to be pulled out?
-app.use(session({ secret: 'keyboard cat' }));  // Session Auth
+app.use(session({secret: 'keyboard cat'}));  // Session Auth
 app.use(passport.initialize());
 app.use(passport.session());
 // TODO(allard); This probably needs to go somewhere nice.

@@ -3,7 +3,6 @@
 
 var express = require('express');
 var passport = require('passport');
-var path = require('path');
 var router = express.Router();
 
 
@@ -48,7 +47,7 @@ router.get(
             'https://www.googleapis.com/auth/userinfo.email'
         ]}
     ),
-    function(req, res){
+    function(req, res) {
         // The request will be redirected to Google for authentication, so this
         // function will not be called.
     }
@@ -60,7 +59,7 @@ router.get(
         res.redirect('/');
     }
 );
-router.get('/auth/logout', function(req, res){
+router.get('/auth/logout', function(req, res) {
     req.logout();
     req.session.destroy();
     res.redirect('/');

@@ -10,11 +10,13 @@ module.exports = function(grunt) {
         // Configure all paths.
         paths: {
             js: [
+                '*.js',
                 'config/**/*.js',
                 'controllers/**/*.js',
                 'fixtures/**/*.js',
                 'models/**/*.js',
                 'public/**/*.js',
+                'routes/**/*.js',
                 'scripts/**/*.js',
                 'views/**/*.js'
             ]
