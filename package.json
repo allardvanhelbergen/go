@@ -9,7 +9,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "nodemon --debug . NODE_ENV=development"
+    "start": "./scripts/setup.sh; nodemon --debug . NODE_ENV=development"
   },
   "dependencies": {
     "body-parser": "^1.9.1",
