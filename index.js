@@ -82,7 +82,7 @@ app.use(session({secret: 'keyboard cat'}));  // Session Auth
 app.use(passport.initialize());
 app.use(passport.session());
 // TODO(allard); This probably needs to go somewhere nicer, like ./lib?
-app.use(UserController.saveOrUpdate);  // Save the user to the DB
+app.use(UserController.createOrUpdate);  // Save the user to the DB
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(router);  // Routes
 

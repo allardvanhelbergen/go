@@ -1,10 +1,11 @@
 'use strict';
 
 
+var Q = require('q');
 var UserModel = require('../models/UserModel');
 
 
-exports.saveOrUpdate = function(req, res, next) {
+exports.createOrUpdate = function(req, res, next) {
     res.locals.session = req.session;
 
     if (req.user) {
@@ -19,17 +20,20 @@ exports.saveOrUpdate = function(req, res, next) {
             pictureUrl: req.user._json.picture
         };
 
-        UserModel.findOneAndUpdate(query, update, {upsert: true}, function(err, doc) {
-            if (err) {
+        var createOrUpdateUser = function() {
+            return Q.npost(UserModel, 'findOneAndUpdate', [query, update, {upsert: true}])
+        }
+
+        createOrUpdateUser()
+            .catch(function(err) {
                 console.error('DB error:', update);
-            }
-
-            res.locals.bwUser = doc._doc;
-            console.log(res.locals.bwUser);
-        });
-
-        // TODO(allard): Do I need a next() here too?
+                return next(err);
+            })
+            .done(function(doc) {
+                res.locals.bwUser = req.bwUser = doc._doc;
+                next();
+            });
+    } else {
+        next();
     }
-
-    next();
 };
