@@ -30,14 +30,13 @@ exports.create = function(req, res, next) {
         return next(new Error('No URL data provided.'));
     }
 
-    // TODO(allard): Add the owner ID after we've figured authentication out.
     GoLinkModel.create({
         longUri: req.body.longUri,
         shortUri: req.body.shortUri,
-        ownerEmail: req.user._json.email
-        // owner: user._id
+        ownerId: req.bwUser._id
     }, function(err, link) {
         if (err) {
+            console.error(err);
             return next(err);
         }
 

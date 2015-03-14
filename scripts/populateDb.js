@@ -49,7 +49,7 @@ var saveLinks = function(users) {
             return user.email === goLink.owner;
         });
 
-        goLink.owner = owner._id;
+        goLink.ownerId = owner._id;
     });
 
     return Q.npost(GoLinkModel, 'create', goLinks)
