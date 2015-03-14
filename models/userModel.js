@@ -18,7 +18,8 @@ var UserSchema = new mongoose.Schema({
         unique: true
     },
     pictureUrl: {
-        type: String
+        type: String,
+        default: '/img/profile-picture-default.jpg'
     }
 });
 
