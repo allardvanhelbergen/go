@@ -1,22 +1,27 @@
 [
     {
         "name" : "Alena",
-        "email" : "alena"
+        "email" : "alena@brandwatch.com",
+        "pictureUrl": "/img/profile-picture-default.jpg"
     },
     {
         "name" : "Allard",
-        "email" : "allard"
+        "email" : "allard@brandwatch.com",
+        "pictureUrl": "/img/profile-picture-default.jpg"
     },
     {
         "name" : "Antonio",
-        "email" : "antonio"
+        "email" : "antonio@brandwatch.com",
+        "pictureUrl": "/img/profile-picture-default.jpg"
     },
     {
         "name" : "Dan",
-        "email" : "cham"
+        "email" : "cham@brandwatch.com",
+        "pictureUrl": "/img/profile-picture-default.jpg"
     },
     {
         "name" : "Giles",
-        "email" : "giles"
+        "email" : "giles@brandwatch.com",
+        "pictureUrl": "/img/profile-picture-default.jpg"
     }
 ]

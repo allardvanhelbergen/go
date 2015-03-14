@@ -16,6 +16,9 @@ var UserSchema = new mongoose.Schema({
         trim: true,
         required: true,
         unique: true
+    },
+    pictureUrl: {
+        type: String
     }
 });
 

@@ -21,12 +21,10 @@
 // Module dependencies.
 var bodyParser = require('body-parser');
 var config = require('./config');
-// var errorhandler = ('errorhandler');
 var exphbs = require('express-handlebars');
 var express = require('express');
 var favicon = require('serve-favicon');
 var fs = require('fs');
-// var methodOverride = require('method-override');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var mongoose = require('mongoose');
 var morgan = require('morgan');
@@ -34,6 +32,7 @@ var passport = require('passport');
 var path = require('path');
 var router = require('./routes');
 var session = require('express-session');
+var UserController = require('./controllers/userController');
 
 
 passport.serializeUser(function(user, done) {
@@ -82,23 +81,8 @@ app.use(express.static(path.join('.', 'public')));
 app.use(session({secret: 'keyboard cat'}));  // Session Auth
 app.use(passport.initialize());
 app.use(passport.session());
-// TODO(allard); This probably needs to go somewhere nice.
-app.use(function(req, res, next) {
-    res.locals.session = req.session;
-    res.locals.user = req.user;
-    next();
-});
-
-// Set envirionment variables - DEV
-// if (process.env.NODE_ENV === 'development') {
-//     app.use(errorhandler());
-// }
-
-// Set envirionment variables - PROD
-// if (app.get('env') === 'production') {
-//     app.enable('view cache');
-// }
-
+// TODO(allard); This probably needs to go somewhere nicer, like ./lib?
+app.use(UserController.saveOrUpdate);  // Save the user to the DB
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(router);  // Routes
 
