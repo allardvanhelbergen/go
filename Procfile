@@ -1,2 +1,2 @@
-web: ./scripts/setup.sh; nodemon --debug . NODE_ENV=development
 mongodb: mongod
+web: ./scripts/setup.sh; $WEB_CMD

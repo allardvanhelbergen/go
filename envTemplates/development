@@ -1,0 +1,11 @@
+{
+    "mongo": {
+        "hostname": "localhost",
+        "port": 27017,
+        "database": "go"
+    },
+    "web": {
+        "port": 3000,
+        "cmd": "nodemon --debug . NODE_ENV=development"
+    }
+}
