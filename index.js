@@ -45,7 +45,7 @@ var app = express();
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));  //
 app.set('view engine', 'handlebars');
-app.set('port', process.env.PORT || config.http.port);
+app.set('port', process.env.NODE_PORT || config.http.port);
 
 
 app.use(morgan('dev'));  // Logging

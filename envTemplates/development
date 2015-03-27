@@ -4,8 +4,9 @@
         "port": 27017,
         "database": "go"
     },
-    "web": {
-        "port": 3000,
-        "cmd": "nodemon --debug . NODE_ENV=development"
+    "node": {
+        "cmd": "nodemon --debug .",
+        "env": "development",
+        "port": 3000
     }
 }

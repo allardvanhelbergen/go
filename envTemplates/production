@@ -4,8 +4,9 @@
         "port": 27017,
         "database": "go"
     },
-    "web": {
-        "port": 8000,
-        "cmd": "npm start"
+    "node": {
+        "cmd": "node .",
+        "env": "production",
+        "port": 8000
     }
 }
