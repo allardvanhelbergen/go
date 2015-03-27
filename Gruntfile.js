@@ -15,7 +15,6 @@ module.exports = function(grunt) {
                 'controllers/**/*.js',
                 'fixtures/**/*.js',
                 'models/**/*.js',
-                'public/**/*.js',
                 'routes/**/*.js',
                 'scripts/**/*.js',
                 'views/**/*.js'
