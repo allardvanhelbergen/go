@@ -1,5 +1,9 @@
+'use strict';
+
+
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
 
 function initOauth() {
     passport.serializeUser(function(user, done) {
@@ -16,8 +20,8 @@ function initOauth() {
             callbackURL: "http://localhost:3000/auth/google/callback"
         },
         function(accessToken, refreshToken, profile, done) {
-            if(profile._json.hd === "brandwatch.com"){
-                process.nextTick(function () {
+            if (profile._json.hd === 'brandwatch.com'){
+                process.nextTick(function() {
                     return done(null, profile);
                 });
             } else {
@@ -27,5 +31,6 @@ function initOauth() {
         }
     ));
 }
+
 
 exports.initOauth = initOauth;

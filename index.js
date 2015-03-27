@@ -20,11 +20,11 @@
 
 // Module dependencies.
 var bodyParser = require('body-parser');
+var config = require('./config');
 var exphbs = require('express-handlebars');
 var express = require('express');
 var favicon = require('serve-favicon');
 var fs = require('fs');
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var mongoose = require('mongoose');
 var morgan = require('morgan');
 var passport = require('passport');
@@ -32,10 +32,10 @@ var path = require('path');
 var router = require('./routes');
 var session = require('express-session');
 var UserController = require('./controllers/userController');
-var oauthController = require('./controllers/oauthController');
+var OAuthController = require('./controllers/oAuthController');
 
 //initialize authentication
-oauthController.initOauth();
+OAuthController.initOauth();
 
 // Set database.
 mongoose.connect(config.mongodb.uri);

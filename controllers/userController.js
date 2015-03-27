@@ -21,8 +21,8 @@ exports.createOrUpdate = function(req, res, next) {
         };
 
         var createOrUpdateUser = function() {
-            return Q.npost(UserModel, 'findOneAndUpdate', [query, update, {upsert: true}])
-        }
+            return Q.npost(UserModel, 'findOneAndUpdate', [query, update, {upsert: true}]);
+        };
 
         createOrUpdateUser()
             .catch(function(err) {
