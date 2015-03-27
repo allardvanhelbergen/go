@@ -15,11 +15,14 @@ You must have MongoDB installed. Use Homebrew to install it.
 ### Installing and Running
 
 - Clone this repository.
-- Run `./scripts/setup.sh` to install all dependencies.
-- Run `mongod` to start the database.
- - Optionally populate your database with `./scripts/populateDb.js`
-- Run `npm start` to run the app.
- - Optionally run `node-inspector` to start the debugger.
+- Copy an environment template from `envTemplates/` to `.env`.
+- Run `npm start` to start everything. This will run:
+ - `./scripts/setup.sh` to install all dependencies,
+ - `mongod` to start the local db,
+ - `nodemon . --debug` to start the app with debugger support.
+- Optionally, while the app is running:
+ - populate your database with `./scripts/populateDb.js`,
+ - run `node-inspector` (in a separate terminal window) to start the debugger.
 - Open `http://localhost:3000/` in your browser.
 
 
