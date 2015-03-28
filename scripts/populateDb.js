@@ -13,7 +13,7 @@ var mongoose = require('mongoose');
 
 // Models
 var GoLinkModel = require('../models/goLinkModel');
-var UserModel = require('../models/UserModel');
+var UserModel = require('../models/userModel');
 
 // Fixture data
 var goLinks = require('../fixtures/goLinksFixture.json');

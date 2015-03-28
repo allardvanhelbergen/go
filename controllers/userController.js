@@ -2,7 +2,7 @@
 
 
 var Q = require('q');
-var UserModel = require('../models/UserModel');
+var UserModel = require('../models/userModel');
 
 
 exports.createOrUpdate = function(req, res, next) {
