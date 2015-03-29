@@ -1,40 +1,36 @@
 #!/usr/bin/env bash
 
 
-# cp current files to back up dir
-TARGET_DIR=../go-backup/go-$(date +'%Y%m%d')
-echo '****'
-printf 'Backing up files to "%s"...\n' $TARGET_DIR
-echo '****'
-cp -Rf . $TARGET_DIR
+function title {
+    echo
+    echo "# $1..."
+    echo
+}
 
-# Stop forever first
-echo '****'
-echo 'Stopping the App...'
-echo '****'
-# TODO(allard): How do you stop the app?!
+
+# TODO(allard): How do you stop the app without killing everything?!
+# Stop forever first.
+# title "Stopping the App"
 # forever stop 0
 
-# git pull newest and install
-echo '****'
-echo 'Pulling newest version...'
-echo '****'
-git pull
+# Copy current files to back up directory   .
+title "Backing up files"
+TARGET_DIR=../go-backup/go-$(date +"%Y%m%d-%H%M%S")
+printf "Target directory: %s\n" $TARGET_DIR
+cp -Rf . $TARGET_DIR
 
-echo '****'
-echo 'Running set up'
-echo '****'
+# Pull newest version from Git and install.
+title "Pulling newest version"
+git pull origin master
+
+title "Running set up"
 ./scripts/setup.sh
 
-# restart app
+# Restart the app.
+title "Restarting the App"
+forever restartall
 
-echo '****'
-echo 'Restarting the App...'
-echo '****'
-npm start-prod
-
-
-echo '****'
-echo 'Hooray! \o/'
-echo '****'
+# Finish.
+title "Done"
+echo "Hooray! \o/"
 exit 0
