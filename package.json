@@ -9,7 +9,8 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "nf start"
+    "start": "./scripts/setup.sh; nf start",
+    "prod": "./scripts/setup.sh; nf start web=1"
   },
   "dependencies": {
     "body-parser": "^1.9.1",

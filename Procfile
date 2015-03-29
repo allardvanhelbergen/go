@@ -1,2 +1,2 @@
-mongodb: mongod
-web: ./scripts/setup.sh; $NODE_CMD
+mongodb: $MONGO_CMD
+web: $NODE_CMD

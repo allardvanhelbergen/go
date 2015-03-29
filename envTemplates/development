@@ -1,8 +1,9 @@
 {
     "mongo": {
+        "cmd": "mongod",
+        "database": "go",
         "hostname": "localhost",
-        "port": 27017,
-        "database": "go"
+        "port": 27017
     },
     "node": {
         "cmd": "nodemon --debug .",
