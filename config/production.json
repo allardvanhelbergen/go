@@ -1,0 +1,8 @@
+{
+    "mongodb": {
+        "uri": "mongodb://localhost/go"
+    },
+    "http": {
+        "port" : 8000
+    }
+}

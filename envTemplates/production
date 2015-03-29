@@ -1,12 +1,15 @@
 {
     "mongo": {
+        "cmd": "mongod",
+        "database": "go",
         "hostname": "localhost",
-        "port": 27017,
-        "database": "go"
+        "port": 27017
     },
     "node": {
-        "cmd": "node .",
+        "cmd": "forever --minUptime=NODE_MINUPTIME --spinSleepTime=NODE_SPINSLEEPTIME .",
         "env": "production",
-        "port": 8000
+        "minUptime": 2000,
+        "port": 8000,
+        "spinSleepTime": 1000
     }
 }
