@@ -25,6 +25,12 @@ You must have MongoDB installed. Use Homebrew to install it.
  - run `node-inspector` (in a separate terminal window) to start the debugger.
 - Open `http://localhost:3000/` in your browser.
 
+### Deploying
+
+- Get your Github public key on Lightning.
+- Log into the prod server with `ssh brandwatch@lightning`.
+- Run the deploy script from the app dir on the master branch with `./scripts/deploy.sh`.
+
 
 ## Contributing
 
