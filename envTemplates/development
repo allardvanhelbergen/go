@@ -9,5 +9,13 @@
         "cmd": "nodemon --debug .",
         "env": "development",
         "port": 3000
+    },
+    "passport": {
+        "clientID": "alien-gibberish.apps.googleusercontent.com",
+        "clientSecret": "space-dust"
+    },
+    "session": {
+        "secret": "Space cat with laser eyes"
     }
+
 }

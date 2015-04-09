@@ -11,5 +11,12 @@
         "minUptime": 2000,
         "port": 8000,
         "spinSleepTime": 1000
+    },
+    "passport": {
+        "clientID": "alien-gibberish.apps.googleusercontent.com",
+        "clientSecret": "space-dust"
+    },
+    "session": {
+        "secret": "Space cat with laser eyes"
     }
 }
