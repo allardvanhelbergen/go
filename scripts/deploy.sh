@@ -4,38 +4,38 @@
 set -e
 
 
-TARGET_DIR=../go-backup/go-$(date +"%Y%m%d-%H%M%S")
+BACKUP_DIR="$HOME/go-backup/go-"$(date +"%Y%m%d-%H%M%S")
+GO_DIR="$HOME/go"
 
 
-function title {
+function echoTitle {
     echo
-    echo "# $1..."
-    echo
+    echo "### $1..."
 }
 
 
 # TODO(allard): How do you stop the app without killing everything?!
 # Stop forever first.
-# title "Setting phasers to stun"
+# echoTitle "Setting phasers to stun"
 # forever stop 0
 
 # Copy current files to back up directory   .
-title "Backing up files to Flight Control"
-printf "Target directory: %s\n" $TARGET_DIR
-cp -Rf . $TARGET_DIR
+echoTitle "Backing Up Files to Mission Control"
+printf "Target directory: %s\n" $BACKUP_DIR
+cp -Rf $GO_DIR $BACKUP_DIR
 
 # Pull newest version from Git and install.
-title "Pulling newest version from Space Center"
+echoTitle "Pulling New Instructions From Command Center"
 git pull origin master
 
-title "Running Initialisation Protocols"
+echoTitle "Running Initialisation Protocols"
 ./scripts/setup.sh
 
 # Restart the app.
-title "Restarting Go"
+echoTitle "Restarting Go/"
 forever restartall
 
 # Finish.
-title "Mission Complete"
+echoTitle "Mission Accepted"
 echo "Ready to boldly go, where no link has gone before!"
 exit 0
