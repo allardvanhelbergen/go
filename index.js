@@ -46,7 +46,6 @@ var app = express();
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));  //
 app.set('view engine', 'handlebars');
 app.set('port', process.env.NODE_PORT || config.http.PORT);
-app.set('config', config);
 
 app.use(morgan('dev'));  // Logging
 // Favicon and Static paths need to go before Session middleware to avoid superfluous session creation.
