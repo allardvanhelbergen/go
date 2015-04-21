@@ -30,6 +30,8 @@ You must have MongoDB installed. Use Homebrew to install it.
 - Get your Github public key on Lightning.
 - Log into the prod server with `ssh brandwatch@lightning`.
 - Run the deploy script from the app dir on the master branch with `./scripts/deploy.sh`.
+ - If it for any reason isn't running, start it with `npm run prod`.
+ - Validate that it's running with `forever list`.
 
 
 ## Contributing

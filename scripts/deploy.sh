@@ -38,4 +38,6 @@ forever restartall
 # Finish.
 echoTitle "Mission Accepted"
 echo "Ready to boldly go, where no link has gone before!"
+echo ""
+
 exit 0

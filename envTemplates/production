@@ -6,7 +6,7 @@
         "port": 27017
     },
     "node": {
-        "cmd": "forever --minUptime=NODE_MINUPTIME --spinSleepTime=NODE_SPINSLEEPTIME .",
+        "cmd": "forever start --minUptime=NODE_MINUPTIME --spinSleepTime=NODE_SPINSLEEPTIME .",
         "env": "production",
         "minUptime": 2000,
         "port": 8000,
