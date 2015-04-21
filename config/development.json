@@ -1,8 +1,8 @@
 {
-    "mongodb": {
-        "uri": "mongodb://localhost/go"
+    "app": {
+        "TITLE": "DevGo/"
     },
-    "http": {
-        "port" : 3000
+    "passport": {
+        "CALLBACK_URL": "http://localhost:3000/auth/google/callback"
     }
 }

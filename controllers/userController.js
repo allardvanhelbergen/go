@@ -6,6 +6,7 @@ var UserModel = require('../models/userModel');
 
 
 exports.createOrUpdate = function(req, res, next) {
+    // TODO(allard): does this belong here?
     res.locals.session = req.session;
 
     if (req.user) {

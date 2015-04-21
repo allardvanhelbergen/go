@@ -21,7 +21,7 @@ var users = require('../fixtures/usersFixture.json');
 
 
 // Connect to database.
-// TODO(allard); Move all of this DB stuff into config or sth.
+// TODO(allard): Figure out how to pull this from the .env file manually.
 mongoose.connect('mongodb://localhost:27017/go?auto_reconnect');
 
 

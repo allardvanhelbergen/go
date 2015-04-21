@@ -38,20 +38,26 @@ var OAuthController = require('./controllers/oAuthController');
 OAuthController.initOauth();
 
 // Set database.
-mongoose.connect('mongodb://' + process.env.MONGO_HOSTNAME + '/' + process.env.MONGO_DATABASE);
+mongoose.connect('mongodb://' + process.env.MONGO_HOSTNAME + '/' + process.env.MONGO_DATABASE + '?auto_reconnect');
 
 // Initialise the app.
 var app = express();
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));  //
 app.set('view engine', 'handlebars');
-app.set('port', process.env.NODE_PORT);
+app.set('port', process.env.NODE_PORT || config.http.PORT);
 app.set('config', config);
 
 app.use(morgan('dev'));  // Logging
 // Favicon and Static paths need to go before Session middleware to avoid superfluous session creation.
 app.use(favicon(path.join('.', 'public', 'favicon.ico')));
 app.use(express.static(path.join('.', 'public')));
+// TODO(allard); This probably needs to go somewhere nicer, like ./lib?
+app.use(function(req, res, next) {
+    res.locals.config = {};
+    res.locals.config.app = config.app;
+    next();
+});
 app.use(session({secret: process.env.SESSION_SECRET}));  // Session Auth
 app.use(passport.initialize());
 app.use(passport.session());
@@ -69,7 +75,6 @@ app.listen(app.get('port'), function() {
         }
         // TODO(allard): So how do you do this without a console.log?
         console.log(data);
-        // TODO(allard): var localhost?
         console.log('Express server listening on http://localhost:' + app.get('port'));
     });
 });

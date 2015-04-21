@@ -1,0 +1,18 @@
+{
+    "app": {
+        "AUTHOR_LDAP": "allard",
+        "AUTHOR_URL": "https://brandwatch.namely.com/people/8f429f2d-26ed-469b-a7a8-b81644acf655",
+        "DESCRIPTION": "The Brandwatch Custom URL Creator",
+        "ISSUE_URL": "https://github.com/bw-allardvanhelbergen/go/issues/new",
+        "TITLE": "Go/"
+    },
+    "http": {
+        "PORT": 3000
+    },
+    "passport": {
+        "SCOPE": [
+            "https://www.googleapis.com/auth/userinfo.profile",
+            "https://www.googleapis.com/auth/userinfo.email"
+        ]
+    }
+}

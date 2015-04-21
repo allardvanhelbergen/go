@@ -1,6 +1,7 @@
 'use strict';
 
 
+var config = require('../config');
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
@@ -14,7 +15,7 @@ var GoLinkModel = require('../models/goLinkModel');
 var indexController = require('../controllers/indexController');
 var goLinkController = require('../controllers/goLinkController');
 
-
+// TODO(allard): extract this out
 var ensureAuthenticated = function(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
@@ -30,7 +31,11 @@ router.param('shortUri', function(req, res, next, shortUri) {
         if (err) {
             res.json(err);
         }
-        console.log(docs);
+
+        if (!docs[0]) {
+            return next;
+        }
+
         req.goLink = docs[0];
         next();
     });
@@ -40,13 +45,7 @@ router.param('shortUri', function(req, res, next, shortUri) {
 // TODO(allard): Put all of these into an auth controller
 router.get(
     '/auth/google',
-    passport.authenticate(
-        'google',
-        {scope: [
-            'https://www.googleapis.com/auth/userinfo.profile',
-            'https://www.googleapis.com/auth/userinfo.email'
-        ]}
-    ),
+    passport.authenticate('google', {scope: config.passport.SCOPE}),
     function(req, res) {
         // The request will be redirected to Google for authentication, so this
         // function will not be called.
@@ -55,6 +54,7 @@ router.get(
 router.get(
     '/auth/google/callback',
     passport.authenticate('google', {}),
+
     function(req, res) {
         res.redirect('/');
     }

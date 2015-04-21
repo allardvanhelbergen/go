@@ -1,3 +1,15 @@
-// Exports only the config for the current environment.
-// As per http://dailyjs.com/2014/01/02/recipe-for-express-configuration/
-module.exports = require('./' + (process.env.NODE_ENV || 'development') + '.json');
+'use strict';
+
+
+var _ = require('lodash');
+
+
+// Load partial configs.
+var globalConfig = require('./global.json');
+var envConfig = require('./' + (process.env.NODE_ENV || 'development') + '.json');
+
+// Combine the partial configs.
+var config = _.merge(globalConfig, envConfig);
+
+
+module.exports = config;
