@@ -6,7 +6,7 @@ It allows you to make personal and memorable short URLs for longer, immemorable,
 You can (soon) find the live version at [go/](http://go/).
 
 
-## Usage
+## Development
 
 ### Prerequisites
 
@@ -25,14 +25,34 @@ You must have MongoDB installed. Use Homebrew to install it.
  - run `node-inspector` (in a separate terminal window) to start the debugger.
 - Open `http://localhost:3000/` in your browser.
 
-### Deploying
+## Deployment
 
-- Get your Github public key on Lightning.
+### Prerequisites
+
+Get your Github public key on Lightning. File a ticket with systems for this.
+
+### Deploying New Version to Production
+
 - Log into the prod server with `ssh brandwatch@lightning`.
 - Run the deploy script from the app dir on the master branch with `./scripts/deploy.sh`.
  - If it for any reason isn't running, start it with `npm run prod`.
  - Validate that it's running with `forever list`.
 
+### Notes on Maintenance of Production
+
+#### Connecting to MongoDB with RoboMongo
+
+[RoboMongo](http://robomongo.org/) currently has
+[a bug](https://github.com/paralect/robomongo/issues/484)
+making it unable to connect through ssh.
+A [comment](https://github.com/paralect/robomongo/issues/484#issuecomment-47926092)
+on the bug issue proposes the following workaround.
+
+- Set up a tunnel by running
+`ssh brandwatch@lightning -L <local port, e.g. 27018>:127.0.0.1:<destination port, e.g. 27017>
+- In RoboMongo create the connection to with the corresponding settings.
+  - Host: `127.0.0.1` (your localhost)
+  - Port: `27018` (your local port)
 
 ## Contributing
 
