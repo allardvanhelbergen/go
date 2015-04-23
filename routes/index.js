@@ -12,9 +12,6 @@ var lib = require('../lib');
 var passport = require('passport');
 var router = express.Router();
 
-// Models
-var GoLinkModel = require('../models/goLinkModel');
-
 // Controllers
 var authController = require('../controllers/authController');
 var indexController = require('../controllers/indexController');

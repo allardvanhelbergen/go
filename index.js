@@ -73,7 +73,7 @@ app.use(lib.renderRouteNotFound);
 app.listen(app.get('port'), function() {
     fs.readFile(path.join(__dirname, 'fixtures', 'LAUNCH_MESSAGE.txt'), 'utf-8', function(err, data) {
         if (err) {
-            return console.error(err);
+            return console.error('Read file error:', err);
         }
         // TODO(allard): So how do you do this without a console.log?
         console.log(data);

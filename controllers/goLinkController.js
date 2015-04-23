@@ -18,6 +18,10 @@ exports.findAll = function(req, res) {
  * GET: Show JSON for Go Link matching a shorturi.
  */
 exports.findByShortUri = function(req, res) {
+    if (!req.goLink) {
+        res.status(404).json({'404': 'go-link not found.'});
+    }
+
     res.json(req.goLink);
 };
 
@@ -36,7 +40,6 @@ exports.create = function(req, res, next) {
         ownerId: req.bwUser._id
     }, function(err, link) {
         if (err) {
-            console.error(err);
             return next(err);
         }
 
