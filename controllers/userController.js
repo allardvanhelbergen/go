@@ -32,9 +32,9 @@ exports.createOrUpdate = function(req, res, next) {
             })
             .done(function(doc) {
                 res.locals.bwUser = req.bwUser = doc._doc;
-                next();
+                return next();
             });
     } else {
-        next();
+        return next();
     }
 };

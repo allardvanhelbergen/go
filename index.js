@@ -15,6 +15,7 @@
  * error handlers. Please note, the order of loading is important.
  */
 
+
 'use strict';
 
 
@@ -25,6 +26,7 @@ var exphbs = require('express-handlebars');
 var express = require('express');
 var favicon = require('serve-favicon');
 var fs = require('fs');
+var lib = require('./lib');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
 var passport = require('passport');
@@ -47,23 +49,24 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));  //
 app.set('view engine', 'handlebars');
 app.set('port', process.env.NODE_PORT || config.http.PORT);
 
+// Pre routing Middleware.
 app.use(morgan('dev'));  // Logging
 // Favicon and Static paths need to go before Session middleware to avoid superfluous session creation.
 app.use(favicon(path.join('.', 'public', 'favicon.ico')));
 app.use(express.static(path.join('.', 'public')));
-// TODO(allard); This probably needs to go somewhere nicer, like ./lib?
-app.use(function(req, res, next) {
-    res.locals.config = {};
-    res.locals.config.app = config.app;
-    next();
-});
+app.use(lib.putConfigInLocals);
 app.use(session({secret: process.env.SESSION_SECRET}));  // Session Auth
 app.use(passport.initialize());
 app.use(passport.session());
-// TODO(allard); This probably needs to go somewhere nicer, like ./lib?
 app.use(UserController.createOrUpdate);  // Save the user to the DB
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(router);  // Routes
+
+// Routes
+app.use(router);
+
+// Post-routing Middleware.
+app.use(lib.renderError);
+app.use(lib.renderRouteNotFound);
 
 
 // Run the server.
