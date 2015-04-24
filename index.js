@@ -28,7 +28,7 @@ var exphbs = require('express-handlebars');
 var express = require('express');
 var favicon = require('serve-favicon');
 var fs = require('fs');
-var lib = require('./lib');
+var middleware = require('./lib/middleware');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
 var passport = require('passport');
@@ -56,7 +56,7 @@ app.use(morgan('dev'));  // Logging
 // Favicon and Static paths need to go before Session middleware to avoid superfluous session creation.
 app.use(favicon(path.join('.', 'public', 'favicon.ico')));
 app.use(express.static(path.join('.', 'public')));
-app.use(lib.putConfigInLocals);
+app.use(middleware.putConfigInLocals);
 // Session Cookie Middleware
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -75,8 +75,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(router);
 
 // Post-routing Middleware.
-app.use(lib.renderError);
-app.use(lib.renderRouteNotFound);
+app.use(middleware.renderError);
+app.use(middleware.renderRouteNotFound);
 
 
 // Run the server.

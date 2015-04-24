@@ -8,7 +8,7 @@
 
 var config = require('../config');
 var express = require('express');
-var lib = require('../lib');
+var middleware = require('../lib/middleware');
 var passport = require('passport');
 var router = express.Router();
 
@@ -19,7 +19,7 @@ var goLinkController = require('../controllers/goLinkController');
 
 
 // Parameter parsing.
-router.param('shortUri', lib.parseParam);
+router.param('shortUri', middleware.parseParam);
 
 // Google OAuth routes.
 // This request will be redirected to Google for authentication, so this function will not be called.
@@ -29,9 +29,9 @@ router.get('/auth/logout', authController.logOutSuccess);
 
 // Go Link Controller Routes.
 router.get('/', indexController.index);
-router.get('/go-link', lib.ensureAuthenticated, goLinkController.findAll);
-router.get('/go-link/:shortUri', lib.ensureAuthenticated, goLinkController.findByShortUri);
-router.post('/go-link', lib.ensureAuthenticated, goLinkController.create);
+router.get('/go-link', middleware.ensureAuthenticated, goLinkController.findAll);
+router.get('/go-link/:shortUri', middleware.ensureAuthenticated, goLinkController.findByShortUri);
+router.post('/go-link', middleware.ensureAuthenticated, goLinkController.create);
 
 // Redirect a Go Link!
 router.get('/:shortUri', indexController.redirect);
