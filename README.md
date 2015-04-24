@@ -15,7 +15,7 @@ You must have MongoDB installed. Use Homebrew to install it.
 ### Installing and Running
 
 - Clone this repository.
-- Copy an environment template from `envTemplates/` to `.env`.
+- Copy an environment template from `envTemplates/` to `.env` e.g. `cp envTemplates/development .env`.
 - Run `npm start` to start everything. This will run:
  - `./scripts/setup.sh` to install all dependencies,
  - `mongod` to start the local db,
@@ -48,8 +48,7 @@ making it unable to connect through ssh.
 A [comment](https://github.com/paralect/robomongo/issues/484#issuecomment-47926092)
 on the bug issue proposes the following workaround.
 
-- Set up a tunnel by running
-`ssh brandwatch@lightning -L <local port, e.g. 27018>:127.0.0.1:<destination port, e.g. 27017>
+- Set up a tunnel from a target port to a local port, by running `ssh brandwatch@lightning -L 27018:127.0.0.1:27017`
 - In RoboMongo create the connection to with the corresponding settings.
   - Host: `127.0.0.1` (your localhost)
   - Port: `27018` (your local port)
