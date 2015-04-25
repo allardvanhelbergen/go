@@ -16,6 +16,15 @@ You must have MongoDB installed. Use Homebrew to install it.
 
 - Clone this repository.
 - Copy an environment template from `envTemplates/` to `.env` e.g. `cp envTemplates/development .env`.
+- Add an OAuth client id and secret
+    - Head to [Google's developer console](http://console.developers.google.com/)
+    - Create a project called "go url shortener" (or whatever)
+    - Go to: API & Auth > Credentials
+    - Click "Create new client ID"
+    - Fill in the details, using:
+        - Redirect URIs: `http://localhost/auth/google/callback`
+        - JavascriptOrigins: `http://localhost`
+    - Add the client ID and secret to your `.env` file
 - Run `npm start` to start everything. This will run:
  - `./scripts/setup.sh` to install all dependencies,
  - `mongod` to start the local db,
