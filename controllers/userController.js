@@ -30,6 +30,7 @@ exports.createOrUpdate = function(req, res, next) {
                 return next(err);
             })
             .done(function(doc) {
+                // TODO(allard): should this go somewhere else? It would be better to call the user ID from session.
                 res.locals.bwUser = req.bwUser = doc._doc;
                 return next();
             });
