@@ -13,6 +13,7 @@ var passport = require('passport');
 var router = express.Router();
 
 // Controllers
+var adminController = require('../controllers/adminController');
 var authController = require('../controllers/authController');
 var indexController = require('../controllers/indexController');
 var goLinkController = require('../controllers/goLinkController');
@@ -26,6 +27,9 @@ router.param('shortUri', middleware.parseParam);
 router.get('/auth/google', passport.authenticate('google', {scope: config.passport.SCOPE}), function() {/* sic */});
 router.get('/auth/google/callback', passport.authenticate('google', {}), authController.logInSuccess);
 router.get('/auth/logout', authController.logOutSuccess);
+
+// Admin Routes
+router.get('/admin/stats', adminController.stats);
 
 // Go Link Controller Routes.
 router.get('/', indexController.index);
