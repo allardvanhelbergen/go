@@ -1,6 +1,7 @@
 'use strict';
 
-
+var util = require('util');
+var winston = require('winston');
 var RedirectLogModel = require('../models/redirectLogModel');
 
 /**
@@ -25,13 +26,13 @@ exports.redirect = function(req, res, next) {
     }).save(function(err, doc) {
         if (err) {
             // Do not return next() here, as this callback will resolve at later point in time.
-            console.error(err);
+            winston.error(err);
         }
 
-        console.log('Updated Redirect Log', doc);
+        winston.info('Updated Redirect Log', util.inspect(doc));
     });
 
     // Redirect
-    console.log('Redirecting:', req.goLink);
+    winston.info('Redirecting:', util.inspect(req.goLink));
     res.redirect(req.goLink.longUri);
 };

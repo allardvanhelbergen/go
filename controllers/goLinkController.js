@@ -1,6 +1,7 @@
 'use strict';
 
-
+var util = require('util');
+var winston = require('winston');
 var GoLinkModel = require('../models/goLinkModel');
 
 
@@ -43,7 +44,7 @@ exports.create = function(req, res, next) {
             return next(err);
         }
 
-        console.info('Added goLink %j', link);
+        winston.info('Added goLink', util.inspect(link));
         res.redirect('/');
     });
 };

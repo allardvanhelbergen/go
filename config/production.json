@@ -1,5 +1,8 @@
 {
     "passport": {
         "CALLBACK_URL": "http://go.brandwatch.com/auth/google/callback"
+    },
+    "logging": {
+        "DIR": "../logs"
     }
 }

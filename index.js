@@ -28,6 +28,7 @@ var exphbs = require('express-handlebars');
 var express = require('express');
 var favicon = require('serve-favicon');
 var fs = require('fs');
+var logging = require('./lib/logging');
 var middleware = require('./lib/middleware');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
@@ -35,8 +36,11 @@ var passport = require('passport');
 var path = require('path');
 var router = require('./routes');
 var session = require('express-session');
+var winston = require('winston');
 var UserController = require('./controllers/userController');
 var OAuthController = require('./controllers/oAuthController');
+
+logging.init();
 
 //initialize authentication
 OAuthController.initOauth();
@@ -83,10 +87,9 @@ app.use(middleware.renderRouteNotFound);
 app.listen(app.get('port'), function() {
     fs.readFile(path.join(__dirname, 'fixtures', 'LAUNCH_MESSAGE.txt'), 'utf-8', function(err, data) {
         if (err) {
-            return console.error('Read file error:', err);
+            return winston.error('Read file error:', err);
         }
-        // TODO(allard): So how do you do this without a console.log?
-        console.log(data);
-        console.log('Express server listening on http://localhost:' + app.get('port'));
+        winston.info(data);
+        winston.info('Express server listening on http://localhost:' + app.get('port'));
     });
 });
