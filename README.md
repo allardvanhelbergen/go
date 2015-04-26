@@ -15,16 +15,16 @@ You must have MongoDB installed. Use Homebrew to install it.
 ### Installing and Running
 
 - Clone this repository.
-- Copy an environment template from `envTemplates/` to `.env` e.g. `cp envTemplates/development .env`.
-- Add an OAuth client id and secret
-    - Head to [Google's developer console](http://console.developers.google.com/)
-    - Create a project called "go url shortener" (or whatever)
+- Copy an environment template file from `envTemplates/` to `.env` e.g. `cp envTemplates/development .env`.
+- Set up the OAuth
+    - Head to [Google's Developer Console](http://console.developers.google.com/)
+    - Create a project called "Go URL Shortener" (or whatever)
     - Go to: API & Auth > Credentials
-    - Click "Create new client ID"
+    - Click "Create new Client ID"
     - Fill in the details, using:
         - Redirect URIs: `http://localhost/auth/google/callback`
-        - JavascriptOrigins: `http://localhost`
-    - Add the client ID and secret to your `.env` file
+        - Javascript Origins: `http://localhost`
+    - Copy the Client ID and Secret to the Passport entries in your `.env` file.
 - Run `npm start` to start everything. This will run:
  - `./scripts/setup.sh` to install all dependencies,
  - `mongod` to start the local db,
@@ -33,6 +33,7 @@ You must have MongoDB installed. Use Homebrew to install it.
  - populate your database with `./scripts/populateDb.js`,
  - run `node-inspector` (in a separate terminal window) to start the debugger.
 - Open `http://localhost:3000/` in your browser.
+
 
 ## Deployment
 
@@ -62,13 +63,16 @@ on the bug issue proposes the following workaround.
   - Host: `127.0.0.1` (your localhost)
   - Port: `27018` (your local port)
 
+
 ## Contributing
 
 Yes, please.
 
-- Make your own branch
-- Do epic stuff.
+- Fork this repo.
+- Make your own feature branch.
+- Do mind blowing stuff.
 - Run `grunt` to validate.
+- Submit a PR to epic for the win.
 
 
 ## Authors
