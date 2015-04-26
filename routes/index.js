@@ -29,7 +29,7 @@ router.get('/auth/google/callback', passport.authenticate('google', {}), authCon
 router.get('/auth/logout', authController.logOutSuccess);
 
 // Admin Routes
-router.get('/admin/stats', adminController.stats);
+router.get('/admin/saved', adminController.saved);
 
 // Go Link Controller Routes.
 router.get('/', indexController.index);
