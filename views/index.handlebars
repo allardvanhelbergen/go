@@ -12,11 +12,14 @@
                             <label for="longUri">
                                 Paste the original URL here
                             </label>
-                            <input type="text"
-                                    class="form-control"
+                            <input
+                                    autocomplete="off"
                                     autofocus
+                                    class="form-control"
                                     name="longUri"
-                                    placeholder="http://dogr.io/wowgo/suchlongurl/nowmuchshort/amaze.png">
+                                    placeholder="http://dogr.io/wowgo/suchlongurl/nowmuchshort/amaze.png"
+                                    required
+                                    type="text">
                         </div>
                         <div class="form-group">
                             <label for="shortUri">
@@ -24,10 +27,14 @@
                             </label>
                             <div class="input-group">
                                 <span class="input-group-addon"><strong>go /</strong></span>
-                                <input type="text"
+                                <input
+                                        autocomplete="off"
                                         class="form-control"
                                         name="shortUri"
-                                        placeholder="suchwow">
+                                        pattern="[a-z0-9\-]+"
+                                        placeholder="suchwow  (letters-numbers-dashes-only)"
+                                        required
+                                        type="text">
                             </div>
                         </div>
                         <button id="submitCreateLink" type="submit" class="btn btn-primary">
