@@ -8,3 +8,10 @@
     width: 30px;
     height: 30px;
 }
+
+.col-center {
+  display: block;
+  float: none;
+  margin-right: auto;
+  margin-left: auto;
+}
