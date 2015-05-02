@@ -10,14 +10,9 @@ module.exports = function(grunt) {
         // Configure all paths.
         paths: {
             js: [
-                '*.js',
-                'config/**/*.js',
-                'controllers/**/*.js',
-                'fixtures/**/*.js',
-                'models/**/*.js',
-                'routes/**/*.js',
-                'scripts/**/*.js',
-                'views/**/*.js'
+                '**/*.js',
+                '!node_modules/**/*',
+                '!public/js/google-analytics.js'
             ]
         },
 
