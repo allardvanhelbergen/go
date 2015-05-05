@@ -5,6 +5,7 @@
  * GET: the callback after authentication.
  */
 exports.logInSuccess = function(req, res) {
+    req.flash('success', 'Log in successful.');
     res.redirect('/');
 };
 

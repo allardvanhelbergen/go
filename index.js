@@ -24,9 +24,11 @@
 // Module dependencies.
 var bodyParser = require('body-parser');
 var config = require('./config');
+var cookieParser = require('cookie-parser');
 var exphbs = require('express-handlebars');
 var express = require('express');
 var favicon = require('serve-favicon');
+var flash = require('connect-flash');
 var fs = require('fs');
 var logging = require('./lib/logging');
 var middleware = require('./lib/middleware');
@@ -60,8 +62,8 @@ app.use(morgan('dev'));  // Logging
 // Favicon and Static paths need to go before Session middleware to avoid superfluous session creation.
 app.use(favicon(path.join('.', 'public', 'favicon.ico')));
 app.use(express.static(path.join('.', 'public')));
-app.use(middleware.putConfigInLocals);
 // Session Cookie Middleware
+app.use(cookieParser());
 app.use(session({
     secret: process.env.SESSION_SECRET,
     saveUninitialized: true,
@@ -70,10 +72,12 @@ app.use(session({
         httpOnly: true
     }
 }));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(UserController.createOrUpdate);  // Save the user to the DB
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(middleware.putConfigInLocals);
 
 // Routes
 app.use(router);
