@@ -40,15 +40,7 @@
     </nav>
 
     <div class="container">
-        {{#if flash.success}}
-            <div class="row">
-                <div class="col-lg-8 col-center">
-                    <div class="alert alert-success" role="alert">
-                        <p>{{flash.success}}</p>
-                    </div>
-                </div>
-            </div>
-        {{/if}}
+        {{> notifications}}
         {{{body}}}
     </div>
 
