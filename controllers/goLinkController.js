@@ -45,7 +45,8 @@ exports.create = function(req, res, next) {
                 winston.info('Did not add duplicate goLink', util.inspect(req.body.shortUri));
                 req.flash(
                     'error',
-                    'The go link go/%s is already taken. Perhaps try something else?',
+                    'Our Space Administration indicates <a class="alert-link" href="%s">go/%s</a> is already taken. Perhaps try something else?',
+                    req.body.shortUri,
                     req.body.shortUri);
                 return res.redirect('/');
             } else {
@@ -54,7 +55,11 @@ exports.create = function(req, res, next) {
         }
 
         winston.info('Added goLink', util.inspect(link));
-        req.flash('success', 'Created go/%s.', req.body.shortUri);
+        req.flash(
+            'success',
+            '3... 2... 1... 0... We have ignition! We have liftoff!!!&nbsp;&nbsp;<a class="alert-link" href="%s">go/%s</a>',
+            req.body.shortUri,
+            req.body.shortUri);
         res.redirect('/');
     });
 };
