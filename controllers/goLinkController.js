@@ -41,7 +41,7 @@ exports.create = function(req, res, next) {
         ownerId: req.bwUser._id
     }, function(err, link) {
         if (err) {
-            if (err.name === "MongoError" && err.code === 11000) {  // Duplicate Key error
+            if (err.name === 'MongoError' && err.code === 11000) {  // Duplicate Key error
                 winston.info('Did not add duplicate goLink', util.inspect(req.body.shortUri));
                 req.flash(
                     'error',
