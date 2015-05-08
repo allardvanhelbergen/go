@@ -1,0 +1,39 @@
+{{#if flash.success}}
+    <div class="row">
+        <div class="col-lg-8 col-center">
+            <div class="alert alert-success" role="alert">
+                <p>{{flash.success}}</p>
+            </div>
+        </div>
+    </div>
+{{/if}}
+
+{{#if flash.info}}
+    <div class="row">
+        <div class="col-lg-8 col-center">
+            <div class="alert alert-info" role="alert">
+                <p>{{flash.info}}</p>
+            </div>
+        </div>
+    </div>
+{{/if}}
+
+{{#if flash.warning}}
+    <div class="row">
+        <div class="col-lg-8 col-center">
+            <div class="alert alert-warning" role="alert">
+                <p>{{flash.warning}}</p>
+            </div>
+        </div>
+    </div>
+{{/if}}
+
+{{#if flash.error}}
+    <div class="row">
+        <div class="col-lg-8 col-center">
+            <div class="alert alert-danger" role="alert">
+                <p>{{flash.error}}</p>
+            </div>
+        </div>
+    </div>
+{{/if}}

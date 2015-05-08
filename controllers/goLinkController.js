@@ -41,10 +41,20 @@ exports.create = function(req, res, next) {
         ownerId: req.bwUser._id
     }, function(err, link) {
         if (err) {
-            return next(err);
+            if (err.name === 'MongoError' && err.code === 11000) {  // Duplicate Key error
+                winston.info('Did not add duplicate goLink', util.inspect(req.body.shortUri));
+                req.flash(
+                    'error',
+                    'The go link go/%s is already taken. Perhaps try something else?',
+                    req.body.shortUri);
+                return res.redirect('/');
+            } else {
+                return next(err);
+            }
         }
 
         winston.info('Added goLink', util.inspect(link));
+        req.flash('success', 'Created go/%s.', req.body.shortUri);
         res.redirect('/');
     });
 };
