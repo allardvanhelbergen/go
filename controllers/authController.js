@@ -5,7 +5,7 @@
  * GET: the callback after authentication.
  */
 exports.logInSuccess = function(req, res) {
-    req.flash('success', 'Log in successful.');
+    // TODO(allard): log point
     res.redirect('/');
 };
 
@@ -14,6 +14,7 @@ exports.logInSuccess = function(req, res) {
  * GET: Redirect on to / on log out success.
  */
 exports.logOutSuccess = function(req, res) {
+    // TODO(allard): log point
     req.logout();
     req.session.destroy();
     res.redirect('/');
