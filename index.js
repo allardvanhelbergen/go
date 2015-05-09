@@ -42,9 +42,11 @@ var winston = require('winston');
 var UserController = require('./controllers/userController');
 var OAuthController = require('./controllers/oAuthController');
 
+
+// Initialize logging through Winston
 logging.init();
 
-//initialize authentication
+// Initialize authentication
 OAuthController.initOauth();
 
 // Set database.
@@ -53,12 +55,13 @@ mongoose.connect('mongodb://' + process.env.MONGO_HOSTNAME + '/' + process.env.M
 // Initialise the app.
 var app = express();
 
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));  //
-app.set('view engine', 'handlebars');
+
+app.engine('hbs', exphbs({defaultLayout: 'main', extname: 'hbs'}));  // Templating
+app.set('view engine', 'hbs');
 app.set('port', process.env.NODE_PORT || config.http.PORT);
 
 // Pre-routing Middleware.
-app.use(morgan('dev'));  // Logging
+app.use(morgan('dev'));  // Format logging with Morgan
 // Favicon and Static paths need to go before Session middleware to avoid superfluous session creation.
 app.use(favicon(path.join('.', 'public', 'favicon.ico')));
 app.use(express.static(path.join('.', 'public')));
