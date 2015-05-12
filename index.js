@@ -40,6 +40,9 @@ var path = require('path');
 var router = require('./routes');
 var session = require('express-session');
 var winston = require('winston');
+
+// Controllers
+var ErrorController = require('./controllers/errorController');
 var UserController = require('./controllers/userController');
 var OAuthController = require('./controllers/oAuthController');
 
@@ -88,8 +91,8 @@ app.use(middleware.putConfigInLocals);
 app.use(router);
 
 // Post-routing Middleware.
-app.use(middleware.renderError);
-app.use(middleware.renderRouteNotFound);
+app.use(ErrorController.renderRouteNotFound);
+app.use(ErrorController.renderError);
 
 
 // Run the server.
