@@ -31,6 +31,7 @@ var favicon = require('serve-favicon');
 var flash = require('connect-flash');
 var fs = require('fs');
 var logging = require('./lib/logging');
+var methodOverride = require('method-override');
 var middleware = require('./lib/middleware');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
@@ -61,6 +62,8 @@ app.set('view engine', 'hbs');
 app.set('port', process.env.NODE_PORT || config.http.PORT);
 
 // Pre-routing Middleware.
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(methodOverride(middleware.parseRequestMethodValue));
 app.use(morgan('dev'));  // Format logging with Morgan
 // Favicon and Static paths need to go before Session middleware to avoid superfluous session creation.
 app.use(favicon(path.join('.', 'public', 'favicon.ico')));
@@ -79,7 +82,6 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(UserController.createOrUpdate);  // Save the user to the DB
-app.use(bodyParser.urlencoded({extended: false}));
 app.use(middleware.putConfigInLocals);
 
 // Routes

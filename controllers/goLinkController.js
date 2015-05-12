@@ -65,3 +65,9 @@ exports.create = function(req, res, next) {
         res.redirect('/');
     });
 };
+
+
+exports.updateTest = function(req, res, next) {
+    req.flash('success', '<strong>OMG!</strong> That was a PUT request!');
+    res.redirect('/_admin/edit-test');
+};

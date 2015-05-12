@@ -30,12 +30,14 @@ router.get('/_auth/google/callback', passport.authenticate('google', {}), authCo
 router.get('/_auth/logout', authController.logOutSuccess);
 
 // Admin Routes
+router.get('/_admin/edit-test', adminController.edit);
 router.get('/_admin/saved', adminController.saved);
 
 // API Routes
 router.get('/_api/go-link', middleware.ensureAuthenticated, goLinkController.findAll);
 router.post('/_api/go-link', middleware.ensureAuthenticated, goLinkController.create);
 router.get('/_api/go-link/:shortUri', middleware.ensureAuthenticated, goLinkController.findByShortUri);
+router.put('/_api/go-link/:shortUri', goLinkController.updateTest);
 
 // Index
 router.get('/', indexController.index);
