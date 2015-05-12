@@ -1,4 +1,9 @@
+/**
+ * The controller for handling go links.
+ */
+
 'use strict';
+
 
 var util = require('util');
 var winston = require('winston');
