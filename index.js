@@ -38,7 +38,7 @@ var morgan = require('morgan');
 var packageJson = require('./package.json');
 var passport = require('passport');
 var path = require('path');
-var router = require('./routes');
+var router = require('./lib/router');
 var session = require('express-session');
 var winston = require('winston');
 
