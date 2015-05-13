@@ -3,6 +3,6 @@
         "TITLE": "DevGo/"
     },
     "passport": {
-        "CALLBACK_URL": "http://localhost:3000/auth/google/callback"
+        "CALLBACK_URL": "http://localhost:3000/_auth/google/callback"
     }
 }

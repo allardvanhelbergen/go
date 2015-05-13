@@ -22,7 +22,7 @@ You must have MongoDB installed. Use Homebrew to install it.
     - Go to: API & Auth > Credentials
     - Click "Create new Client ID"
     - Fill in the details, using:
-        - Redirect URIs: `http://localhost/auth/google/callback`
+        - Redirect URIs: `http://localhost/_auth/google/callback`
         - Javascript Origins: `http://localhost`
     - Copy the Client ID and Secret to the Passport entries in your `.env` file.
 - Run `npm start` to start everything. This will run:

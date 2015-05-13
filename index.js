@@ -31,14 +31,19 @@ var favicon = require('serve-favicon');
 var flash = require('connect-flash');
 var fs = require('fs');
 var logging = require('./lib/logging');
+var methodOverride = require('method-override');
 var middleware = require('./lib/middleware');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
+var packageJson = require('./package.json');
 var passport = require('passport');
 var path = require('path');
-var router = require('./routes');
+var router = require('./lib/router');
 var session = require('express-session');
 var winston = require('winston');
+
+// Controllers
+var ErrorController = require('./controllers/errorController');
 var UserController = require('./controllers/userController');
 var OAuthController = require('./controllers/oAuthController');
 
@@ -50,6 +55,7 @@ logging.init();
 OAuthController.initOauth();
 
 // Set database.
+// TODO(allard): Move to config. Add default.
 mongoose.connect('mongodb://' + process.env.MONGO_HOSTNAME + '/' + process.env.MONGO_DATABASE + '?auto_reconnect');
 
 // Initialise the app.
@@ -58,9 +64,15 @@ var app = express();
 
 app.engine('hbs', exphbs({defaultLayout: 'main', extname: 'hbs'}));  // Templating
 app.set('view engine', 'hbs');
+// TODO(allard): Move to config. Add default.
+// TODO(allard): Should I be doing this here or be putting all of this in config and ignoring app.set?
 app.set('port', process.env.NODE_PORT || config.http.PORT);
+app.set('env', process.env.NODE_ENV || config.http.ENV);
+app.set('package', packageJson);
 
 // Pre-routing Middleware.
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(methodOverride(middleware.parseRequestMethodValue));
 app.use(morgan('dev'));  // Format logging with Morgan
 // Favicon and Static paths need to go before Session middleware to avoid superfluous session creation.
 app.use(favicon(path.join('.', 'public', 'favicon.ico')));
@@ -68,6 +80,7 @@ app.use(express.static(path.join('.', 'public')));
 // Session Cookie Middleware
 app.use(cookieParser());
 app.use(session({
+    // TODO(allard): Move to config. Add default.
     secret: process.env.SESSION_SECRET,
     saveUninitialized: true,
     resave: true,
@@ -79,15 +92,14 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(UserController.createOrUpdate);  // Save the user to the DB
-app.use(bodyParser.urlencoded({extended: false}));
 app.use(middleware.putConfigInLocals);
 
 // Routes
 app.use(router);
 
 // Post-routing Middleware.
-app.use(middleware.renderError);
-app.use(middleware.renderRouteNotFound);
+app.use(ErrorController.renderRouteNotFound);
+app.use(ErrorController.renderError);
 
 
 // Run the server.
@@ -96,7 +108,8 @@ app.listen(app.get('port'), function() {
         if (err) {
             return winston.error('Read file error:', err);
         }
-        winston.info(data);
-        winston.info('Express server listening on http://localhost:' + app.get('port'));
+        winston.warn(data);
+        winston.warn('App running in %s mode.', app.get('env'));
+        winston.warn('Server listening on http://localhost:%d.', app.get('port'));
     });
 });

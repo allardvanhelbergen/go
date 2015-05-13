@@ -31,3 +31,8 @@ exports.saved = function(req, res, next) {
         res.render('saved', result);
     });
 };
+
+
+exports.edit = function(req, res, next) {
+    res.render('edit-test');
+};
