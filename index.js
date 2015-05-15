@@ -17,7 +17,7 @@
 'use strict';
 
 
-require('./lib/app');
+var App = require('./lib/app');
 
 
 // Run the server.
