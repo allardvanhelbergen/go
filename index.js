@@ -21,5 +21,5 @@ var App = require('./lib/app');
 
 
 // Run the server.
-App.initialize();
+App.init();
 App.start();

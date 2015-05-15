@@ -17,9 +17,8 @@ function initOauth() {
     });
 
     passport.use(new GoogleStrategy({
-            // TODO(allard): Move to config. Add default.
-            clientID: process.env.PASSPORT_CLIENTID,
-            clientSecret: process.env.PASSPORT_CLIENTSECRET,
+            clientID: config.passport.CLIENTID,
+            clientSecret: config.passport.CLIENTSECRET,
             // TODO(allard): The port is hardcoded in this variable which sucks. Do sth about it!
             callbackURL: config.passport.CALLBACK_URL
         },
