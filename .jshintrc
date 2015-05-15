@@ -86,11 +86,12 @@
 
     // Custom Globals
     "globals": {
-        "it": true,
-        "describe": true,
+        "after": true,
         "afterEach": true,
-        "beforeEach": true,
+        "App": true,
         "before": true,
-        "after": true
+        "beforeEach": true,
+        "describe": true,
+        "it": true
     }
 }
