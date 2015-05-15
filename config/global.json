@@ -7,13 +7,22 @@
         "TITLE": "Go/"
     },
     "http": {
-        "PORT": 3000,
-        "ENV": "development"
+        "ENV": "development",
+        "PORT": 3000
+    },
+    "mongo": {
+        "DATABASE": "go",
+        "HOSTNAME": "localhost"
     },
     "passport": {
+        "CLIENTID": "alien-gibberish.apps.googleusercontent.com",
+        "CLIENTSECRET": "space-dust",
         "SCOPE": [
             "https://www.googleapis.com/auth/userinfo.profile",
             "https://www.googleapis.com/auth/userinfo.email"
         ]
+    },
+    "session": {
+        "SECRET": "Space cat with laser eyes"
     }
 }
