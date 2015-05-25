@@ -35,7 +35,7 @@ describe('goLinkModel', function() {
         });
 
         // TODO(allard): This isn't working as expected for whatever reason... Need to learn more about tests.
-        xit('Does not save invalid users', function(done){
+        xit('Does not save invalid users', function(done) {
             assert.throws(
                 function() {
                     GoLinkModel.create(invalidUser, function(err, user) {

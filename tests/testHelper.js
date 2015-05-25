@@ -36,5 +36,5 @@ App.Test = {
 
 
 beforeEach(function(done) {
-    App.Test.clearDb(done)
-})
+    App.Test.clearDb(done);
+});

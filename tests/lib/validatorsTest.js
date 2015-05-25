@@ -17,6 +17,6 @@ describe('validators', function() {
         it('Invalidates other chars', function() {
             assert.equal(validators.validateShortUri(OTHER_CHAR), false);
         });
-    })
+    });
 });
 
