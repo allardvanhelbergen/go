@@ -6,7 +6,7 @@
 
 
 var winston = require('winston');
-var config = require('../config');
+var config = require('../../config');
 var GoLinkModel = require('../models/goLinkModel');
 
 

@@ -15,7 +15,15 @@ var GoLinkModel = require('../models/goLinkModel');
  */
 exports.findAll = function(req, res) {
     GoLinkModel.find({}, function(err, docs) {
-        res.json(docs);
+        if (err) {
+            return res.status(422).json({'422': 'Error loading the go links.', message: err.message});
+        }
+
+        if (req.params.format === 'json') {
+            return res.json(docs);
+        } else {
+            return res.render('go-link/index', {goLinks: docs});
+        }
     });
 };
 
@@ -25,10 +33,10 @@ exports.findAll = function(req, res) {
  */
 exports.findByShortUri = function(req, res) {
     if (!req.goLink) {
-        res.status(404).json({'404': 'go-link not found.'});
+        return res.status(404).json({'404': 'go-link not found.'});
     }
 
-    res.json(req.goLink);
+    return res.json(req.goLink);
 };
 
 
@@ -50,7 +58,7 @@ exports.create = function(req, res, next) {
                 winston.info('Did not add duplicate goLink', util.inspect(req.body.shortUri));
                 req.flash(
                     'error',
-                    'Our Space Administration indicates <a class="alert-link" href="%s">go/%s</a> is already taken. ' +
+                    'Space Administration indicates <a class="alert-link" href="%s">go/%s</a> is already taken. ' +
                             'Please try another.',
                     req.body.shortUri,
                     req.body.shortUri);
@@ -63,16 +71,38 @@ exports.create = function(req, res, next) {
         winston.info('Added goLink', util.inspect(link));
         req.flash(
             'success',
-            '3... 2... 1... 0... We have ignition! We have liftoff!!!&nbsp;&nbsp;' +
+            '3... 2... 1... 0... We have ignition! We have lift off!!!&nbsp;&nbsp;' +
                     '<a class="alert-link" href="%s">go/%s</a>',
             req.body.shortUri,
             req.body.shortUri);
-        res.redirect('/');
+        return res.redirect('/');
+    });
+};
+
+
+exports.read = function(req, res) {
+    var id = req.params.id;
+
+    GoLinkModel.findById(id, function(err, docs) {
+        if (err) {
+            return res.status(422).json({'422': 'Error loading the go link.', message: err.message});
+        }
+
+        // TODO(allard): This needs to be handled in a central place.
+        if (!docs) {
+            return res.status(404).json({'404': 'Go link not found.'});
+        }
+
+        if (req.params.format === 'json') {
+            return res.json(docs);
+        } else {
+            return res.render('go-link/show-go-link', {goLink: docs});
+        }
     });
 };
 
 
 exports.updateTest = function(req, res, next) {
     req.flash('success', '<strong>OMG!</strong> That was a PUT request!');
-    res.redirect('/_admin/edit-test');
+    return res.redirect('/_admin/edit-test');
 };
