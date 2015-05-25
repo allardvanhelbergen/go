@@ -1,7 +1,7 @@
 'use strict';
 
 
-var config = require('../config');
+var config = require('../../config');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 

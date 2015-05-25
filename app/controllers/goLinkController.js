@@ -71,7 +71,7 @@ exports.create = function(req, res, next) {
         winston.info('Added goLink', util.inspect(link));
         req.flash(
             'success',
-            '3... 2... 1... 0... We have ignition! We have liftoff!!!&nbsp;&nbsp;' +
+            '3... 2... 1... 0... We have ignition! We have lift off!!!&nbsp;&nbsp;' +
                     '<a class="alert-link" href="%s">go/%s</a>',
             req.body.shortUri,
             req.body.shortUri);
