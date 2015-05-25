@@ -18,7 +18,6 @@ var favicon = require('serve-favicon');
 var flash = require('connect-flash');
 var fs = require('fs');
 var methodOverride = require('method-override');
-var mongoose = require('mongoose');
 var morgan = require('morgan');
 var passport = require('passport');
 var path = require('path');
