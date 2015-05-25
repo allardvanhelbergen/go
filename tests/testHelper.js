@@ -36,5 +36,7 @@ App.Test = {
 
 
 beforeEach(function(done) {
-    App.Test.clearDb(done);
+    // TODO(allard): Change DB address using NODE_ENV, otherwise actual DB would get wiped.
+    // App.Test.clearDb(done);
+    done();
 });

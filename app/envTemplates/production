@@ -9,11 +9,11 @@
         "cmd": "forever start --minUptime=NODE_MINUPTIME --spinSleepTime=NODE_SPINSLEEPTIME .",
         "env": "production",
         "minUptime": 2000,
-        "port": 8000,
+        "port": 3000,
         "spinSleepTime": 1000
     },
     "passport": {
-        "clientID": "alien-gibberish.apps.googleusercontent.com",
+        "clientID": "prod-env-template-alien-gibberish.apps.googleusercontent.com",
         "clientSecret": "space-dust"
     },
     "session": {

@@ -15,7 +15,7 @@
         "HOSTNAME": "localhost"
     },
     "passport": {
-        "CLIENTID": "alien-gibberish.apps.googleusercontent.com",
+        "CLIENTID": "global-json-alien-gibberish.apps.googleusercontent.com",
         "CLIENTSECRET": "space-dust",
         "SCOPE": [
             "https://www.googleapis.com/auth/userinfo.profile",
