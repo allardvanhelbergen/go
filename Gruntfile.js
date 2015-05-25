@@ -13,6 +13,9 @@ module.exports = function(grunt) {
                 '**/*.js',
                 '!node_modules/**/*',
                 '!public/js/google-analytics.js'
+            ],
+            tests: [
+                'tests/**/*.js'
             ]
         },
 
@@ -29,10 +32,19 @@ module.exports = function(grunt) {
             options: {
                 config: '.jscsrc'
             }
+        },
+        mochaTest: {
+            all: {
+                src: '<%= paths.tests %>'
+            },
+            options: {
+                reporter: 'dot'
+            }
         }
     });
 
     // Register Grunt tasks.
-    grunt.registerTask('default', ['validate']);
+    grunt.registerTask('default', ['validate', 'test']);
+    grunt.registerTask('test', ['mochaTest']);
     grunt.registerTask('validate', ['jshint', 'jscs']);
 };
