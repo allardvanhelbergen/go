@@ -12,8 +12,8 @@ var Q = require('q');
 var mongoose = require('mongoose');
 
 // Models
-var GoLinkModel = require('../models/goLinkModel');
-var UserModel = require('../models/userModel');
+var GoLinkModel = require('../app/models/goLinkModel');
+var UserModel = require('../app/models/userModel');
 
 // Fixture data
 var goLinks = require('../fixtures/goLinksFixture.json');

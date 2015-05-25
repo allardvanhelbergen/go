@@ -5,7 +5,7 @@
 'use strict';
 
 
-var config = require('../config');
+var config = require('../../config');
 var express = require('express');
 var middleware = require('../lib/middleware');
 var passport = require('passport');

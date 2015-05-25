@@ -1,7 +1,7 @@
 'use strict';
 
 
-var config = require('../config');
+var config = require('../../config');
 var mongoose = require('mongoose');
 var winston = require('winston');
 

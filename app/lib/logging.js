@@ -2,7 +2,7 @@
 
 var winston = require('winston');
 var LogStream = require('logfilestream').LogStream;
-var config = require('../config');
+var config = require('../../config');
 var path = require('path');
 
 winston.remove(winston.transports.Console);
@@ -10,7 +10,7 @@ winston.remove(winston.transports.Console);
 function init() {
     var loggingDir;
 
-    switch (App.app.get('env')) {
+    switch (config.http.ENV) {
         case 'production':
             loggingDir = path.resolve(__dirname, config.logging.DIR);
             console.log('Enabling logging to ', loggingDir);
