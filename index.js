@@ -20,6 +20,13 @@
 var App = require('./app/lib/app');
 
 
-// Iniitalise the app and run the server.
+// Initalise the app and run the server.
 App.init();
 App.start();
+
+process.on('uncaughtException', function(err) {
+    // handle the error safely
+    console.error('Firing uncaughtException');
+    console.dir(err, {showHidden: true, depth: null, colors: true});
+    process.exit(1);
+});
