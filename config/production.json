@@ -1,6 +1,6 @@
 {
     "logging": {
-        "DIR": "../logs"
+        "DIR": "../../logs"
     },
     "passport": {
         "CALLBACK_URL": "http://go.brandwatch.com/_auth/google/callback"

@@ -1,44 +1,52 @@
 'use strict';
 
-var winston = require('winston');
+
+var fs = require('fs');
 var LogStream = require('logfilestream').LogStream;
-var config = require('../../config');
 var path = require('path');
+var winston = require('winston');
+
+var config = require('../../config');
+
 
 winston.remove(winston.transports.Console);
 
-function init() {
-    var loggingDir;
 
-    switch (config.http.ENV) {
-        case 'production':
-            loggingDir = path.resolve(__dirname, config.logging.DIR);
-            console.log('Enabling logging to ', loggingDir);
-            winston.add(winston.transports.File, {
-                stream: new LogStream({
-                    logdir: loggingDir,
-                    nameformat: '[go.]YYYY-MM-DD[.log]',
-                    duration: 1000 * 60 * 60 * 24  // Rotate every 24 hours.
-                }),
-                handleExceptions: true,
-                exitOnError: false,
-                colorize: false,
-                timestamp: true,
-                json: false,
-                level: 'info'
-            });
-            break;
-        case 'development':
-            winston.add(winston.transports.Console, {
-                colorize: true,
-                timestamp: false,
-                level: 'debug'
-            });
-            break;
+exports.init = function() {
+    var logDir;
+
+    if (config.http.ENV === 'production') {
+        logDir = path.resolve(__dirname, config.logging.DIR);
+
+        // Create the logfile directory
+        try {
+            fs.mkdirSync(logDir);
+            console.info('Created logging directory');
+        } catch (e) {
+            if (e.code !== 'EEXIST') {
+                throw new Error(e);  // Ignore the error if the folder already exists.
+            }
+        }
+
+        console.info('Enabling logging to', logDir);
+        winston.add(winston.transports.File, {
+            stream: new LogStream({
+                logdir: logDir,
+                nameformat: '[go.]YYYY-MM-DD[.log]',
+                duration: 1000 * 60 * 60 * 24  // Rotate every 24 hours.
+            }),
+            handleExceptions: true,
+            exitOnError: false,
+            colorize: false,
+            timestamp: true,
+            json: false,
+            level: 'info'
+        });
+    } else {
+        winston.add(winston.transports.Console, {
+            colorize: true,
+            timestamp: false,
+            level: 'debug'
+        });
     }
-
-}
-
-module.exports = {
-    init: init
 };
