@@ -97,13 +97,24 @@ global.App = {
 
     /**
      * Start the server to listen on the configured port.
+     * Throw an error if there is an error, such as the port being taken.
      */
     start: function() {
         winston.info('Starting the app...');
 
         if (!this.started) {
             this.started = true;
-            this.app.listen(config.http.PORT, logSuccessfulLaunch);
+            this.app.listen(config.http.PORT, logSuccessfulLaunch)
+                .on('error', function(err) {
+                    this.started = false;
+                    if (err.errno === 'EADDRINUSE') {
+                        winston.error('This launchpad has already been taken.');
+                        winston.error('Port:', config.http.PORT);
+                    } else {
+                        winston.error(err);
+                    }
+                    throw err;
+                });
         }
     }
 };

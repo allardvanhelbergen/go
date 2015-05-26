@@ -24,9 +24,14 @@ var App = require('./app/lib/app');
 App.init();
 App.start();
 
+
+/**
+ * Listen to uncaught errors and make them visible.
+ * This is necessary as foreman and nodemon tend to swallow errors sometimes.
+ */
 process.on('uncaughtException', function(err) {
-    // handle the error safely
-    console.error('Firing uncaughtException');
-    console.dir(err, {showHidden: true, depth: null, colors: true});
+    console.error('Obviously a major malfunction. - Firing uncaughtException');
+    console.error(err);
+    throw err;
     process.exit(1);
 });
