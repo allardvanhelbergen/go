@@ -17,6 +17,7 @@ var SECONDS_SAVED_PER_REDIRECT = 10;  // seconds
 exports.saved = function(req, res, next) {
     RedirectLogModel.count({}, function(err, redirectCount) {
         if (err) {
+            // TODO(allard): DB errors
             return next(err);
         }
 

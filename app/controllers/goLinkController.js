@@ -16,6 +16,7 @@ var GoLinkModel = require('../models/goLinkModel');
 exports.findAll = function(req, res) {
     GoLinkModel.find({}, function(err, docs) {
         if (err) {
+            // TODO(allard): DB errors
             return res.status(422).json({'422': 'Error loading the go links.', message: err.message});
         }
 
@@ -54,6 +55,7 @@ exports.create = function(req, res, next) {
         ownerId: req.bwUser._id
     }, function(err, link) {
         if (err) {
+            // TODO(allard): DB errors
             if (err.name === 'MongoError' && err.code === 11000) {  // Duplicate Key error
                 winston.info('Did not add duplicate goLink', util.inspect(req.body.shortUri));
                 req.flash(
@@ -85,6 +87,7 @@ exports.read = function(req, res) {
 
     GoLinkModel.findById(id, function(err, docs) {
         if (err) {
+            // TODO(allard): DB errors
             return res.status(422).json({'422': 'Error loading the go link.', message: err.message});
         }
 

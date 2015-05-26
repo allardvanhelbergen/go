@@ -25,11 +25,12 @@ exports.redirect = function(req, res, next) {
         goLinkId: req.goLink._id
     }).save(function(err, doc) {
         if (err) {
+            // TODO(allard): DB errors
             // Do not return next() here, as this callback will resolve at later point in time.
-            winston.error(err);
+            winston.error('Error saving to redirect logs.', util.inspect(err));
         }
 
-        winston.info('Updated Redirect Log', util.inspect(doc));
+        winston.info('Updated redirect log.', util.inspect(doc));
     });
 
     // Redirect

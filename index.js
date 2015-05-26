@@ -31,7 +31,6 @@ App.start();
  */
 process.on('uncaughtException', function(err) {
     console.error('Obviously a major malfunction. - Firing uncaughtException');
-    console.error(err);
-    throw err;
     process.exit(1);
+    throw err;
 });

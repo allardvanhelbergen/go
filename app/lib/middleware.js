@@ -37,9 +37,10 @@ exports.ensureAuthenticated = function(req, res, next) {
  * Parse the short URI parameter from the request URL.
  */
 exports.parseParam = function(req, res, next, shortUri) {
-    winston.info('Matching shortUri: ' + shortUri);
+    winston.info('Matching shortUri.', shortUri);
     GoLinkModel.find({shortUri: shortUri}, function(err, docs) {
         if (err) {
+            // TODO(allard): DB errors
             return next(err);
         }
 

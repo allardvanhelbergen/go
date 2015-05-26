@@ -22,6 +22,7 @@ var morgan = require('morgan');
 var passport = require('passport');
 var path = require('path');
 var session = require('express-session');
+var util = require('util');
 var winston = require('winston');
 
 // App Modules
@@ -111,7 +112,7 @@ global.App = {
                         winston.error('This launchpad has already been taken.');
                         winston.error('Port:', config.http.PORT);
                     } else {
-                        winston.error(err);
+                        winston.error('Error in the server while listening.', util.inspect(err));
                     }
                     throw err;
                 });
@@ -126,7 +127,7 @@ global.App = {
 var logSuccessfulLaunch = function() {
     fs.readFile(path.join(App.appPath, 'lib', 'LAUNCH_MESSAGE.txt'), 'utf-8', function(err, launchMessage) {
         if (err) {
-            return winston.error('Read file error:', err);
+            return winston.error('Read file error.', util.inspect(err));
         }
         winston.warn(launchMessage);
         winston.info('App running in %s mode.', config.http.ENV);

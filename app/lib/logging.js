@@ -35,18 +35,19 @@ exports.init = function() {
                 nameformat: '[go.]YYYY-MM-DD[.log]',
                 duration: 1000 * 60 * 60 * 24  // Rotate every 24 hours.
             }),
-            handleExceptions: true,
-            exitOnError: false,
             colorize: false,
-            timestamp: true,
+            exitOnError: false,
+            handleExceptions: true,
             json: false,
-            level: 'info'
+            level: 'info',
+            prettyprint: true,
+            timestamp: true,
         });
     } else {
         winston.add(winston.transports.Console, {
             colorize: true,
-            timestamp: false,
-            level: 'debug'
+            level: 'silly',
+            prettyprint: true
         });
     }
 };

@@ -27,6 +27,7 @@ exports.createOrUpdate = function(req, res, next) {
 
         createOrUpdateUser()
             .catch(function(err) {
+                // TODO(allard): DB errors
                 return next(err);
             })
             .done(function(doc) {

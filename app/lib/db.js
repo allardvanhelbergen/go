@@ -18,17 +18,17 @@ module.exports.connect = function() {
     // TODO(allard): This can probably do with some smartening up.
     db.on('close', function(ref) {
         connected = false;
-        winston.error('Database connection closed.', ref);
+        winston.error('Database connection closed.');
     });
 
     db.on('connected', function(ref) {
         connected = true;
-        winston.info('Database connection connected.', ref);
+        winston.info('Database connection connected.');
     });
 
     db.on('disconnected', function(ref) {
         connected = false;
-        winston.log('Database connection disconnected.', ref);
+        winston.log('Database connection disconnected.');
     });
 
     db.on('error', function(err) {
@@ -45,6 +45,6 @@ module.exports.connect = function() {
 
     db.on('reconnect', function(ref) {
         connected = true;
-        winston.info('Database connection reconnect.', ref);
+        winston.info('Database connection reconnect.');
     });
 };
