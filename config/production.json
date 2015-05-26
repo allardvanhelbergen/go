@@ -1,6 +1,7 @@
 {
     "logging": {
-        "DIR": "../../logs"
+        "DIR": "../../logs",
+        "NAME_FORMAT": "[go.]YYYY-MM-DD[.log]"
     },
     "passport": {
         "CALLBACK_URL": "http://go.brandwatch.com/_auth/google/callback"

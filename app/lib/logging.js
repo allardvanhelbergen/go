@@ -32,7 +32,7 @@ exports.init = function() {
         winston.add(winston.transports.File, {
             stream: new LogStream({
                 logdir: logDir,
-                nameformat: '[go.]YYYY-MM-DD[.log]',
+                nameformat: config.logging.NAME_FORMAT,
                 duration: 1000 * 60 * 60 * 24  // Rotate every 24 hours.
             }),
             colorize: false,

@@ -23,7 +23,7 @@ function initOauth() {
             callbackURL: config.passport.CALLBACK_URL
         },
         function(accessToken, refreshToken, profile, done) {
-            if (profile._json.hd === 'brandwatch.com'){
+            if (profile._json.hd === config.app.BW_HOST_DOMAIN){
                 process.nextTick(function() {
                     return done(null, profile);
                 });

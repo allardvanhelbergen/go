@@ -2,6 +2,7 @@
 
 
 var mongoose = require('mongoose');
+var config = require('../../config');
 
 
 var UserSchema = new mongoose.Schema({
@@ -19,7 +20,7 @@ var UserSchema = new mongoose.Schema({
     },
     pictureUrl: {
         type: String,
-        default: '/img/profile-picture-default.jpg'
+        default: config.app.USER_PROFILE_IMG
     }
 });
 

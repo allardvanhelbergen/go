@@ -2,9 +2,11 @@
     "app": {
         "AUTHOR_LDAP": "allard",
         "AUTHOR_URL": "https://brandwatch.namely.com/people/8f429f2d-26ed-469b-a7a8-b81644acf655",
+        "BW_HOST_DOMAIN": "brandwatch.com",
         "DESCRIPTION": "The Brandwatch Custom URL Creator",
         "ISSUE_URL": "https://github.com/bw-allardvanhelbergen/go/issues/new",
-        "TITLE": "Go/"
+        "TITLE": "Go/",
+        "USER_PROFILE_IMG": "/img/profile-picture-default.jpg"
     },
     "http": {
         "ENV": "development",
