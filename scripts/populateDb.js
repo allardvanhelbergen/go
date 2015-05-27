@@ -8,21 +8,18 @@
 
 
 var _ = require('lodash');
-var Q = require('q');
 var mongoose = require('mongoose');
+var argv = require('yargs').argv;
+var Q = require('q');
 
 // Models
 var GoLinkModel = require('../app/models/goLinkModel');
+var RedirectLogModel = require('../app/models/redirectLogModel');
 var UserModel = require('../app/models/userModel');
 
 // Fixture data
 var goLinks = require('../fixtures/goLinksFixture.json');
 var users = require('../fixtures/usersFixture.json');
-
-
-// Connect to database.
-// TODO(allard): Figure out how to pull this from the .env file manually.
-mongoose.connect('mongodb://localhost:27017/go?auto_reconnect');
 
 
 var saveUsers = function() {
@@ -44,7 +41,7 @@ var saveLinks = function(users) {
     }
 
     // Add the correct user id to each go link.
-    goLinks.forEach(function(goLink, i) {
+    goLinks.forEach(function(goLink) {
         owner = _.find(users, function(user) {
             return user.email === goLink.owner;
         });
@@ -59,10 +56,32 @@ var saveLinks = function(users) {
 };
 
 
+var saveRedirects = function(links) {
+    console.log('Saving redirect logs...');
+    var redirects = [];
+
+    links.forEach(function(link, i) {
+        for (var j = 0; j <= i; j++) {
+            redirects.push({goLinkId: link._id});
+        }
+    });
+
+    return Q.npost(RedirectLogModel, 'create', redirects)
+        .tap(function() {
+            console.log('... Done!');
+        });
+}
+
+
 // Run script.
+
+// TODO(allard): Figure out how to pull this from the .env file manually.
+mongoose.connect('mongodb://localhost:27017/go?auto_reconnect');
+
 console.log('Starting to populate DB');
 saveUsers()
     .then(saveLinks)
+    .then(saveRedirects)
     .catch(function(err) {
         console.error('Failed to save:', err);
         return process.exit(-1);
