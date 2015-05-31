@@ -9,7 +9,6 @@
 
 var _ = require('lodash');
 var mongoose = require('mongoose');
-var argv = require('yargs').argv;
 var Q = require('q');
 
 // Models
@@ -70,7 +69,7 @@ var saveRedirects = function(links) {
         .tap(function() {
             console.log('... Done!');
         });
-}
+};
 
 
 // Run script.
