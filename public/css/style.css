@@ -1,4 +1,8 @@
 
+.navbar-footer {
+    margin-bottom: 0;
+}
+
 .navbar-nav > li > a.navbar-avatar-link {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -9,9 +13,20 @@
     height: 30px;
 }
 
-.col-center {
+.col--center {
   display: block;
   float: none;
   margin-right: auto;
   margin-left: auto;
+}
+
+.table-cell--ellipsis {
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.container--main {
+    margin-bottom: 60px
 }

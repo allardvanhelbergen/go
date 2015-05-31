@@ -31,6 +31,7 @@ router.get('/_auth/logout', authController.logOutSuccess);
 // Admin Routes
 router.get('/_admin/edit-test', adminController.edit);
 router.get('/_admin/saved', adminController.saved);
+router.get('/_admin/stats', adminController.stats);
 
 // API Routes
 router.get('/_api/go-link.:format?', goLinkController.findAll);
