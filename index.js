@@ -29,8 +29,8 @@ App.start();
  * Listen to uncaught errors and make them visible.
  * This is necessary as foreman and nodemon tend to swallow errors sometimes.
  */
-process.on('uncaughtException', function(err) {
-    console.error('Obviously a major malfunction. - Firing uncaughtException');
-    process.exit(1);
-    throw err;
-});
+// process.on('uncaughtException', function(err) {
+//     console.error('Obviously a major malfunction. - Firing uncaughtException');
+//     process.exit(1);
+//     throw err;
+// });
