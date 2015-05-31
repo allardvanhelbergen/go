@@ -1,7 +1,4 @@
 {
-    "app": {
-        "BASE_HREF": "http://go"
-    },
     "logging": {
         "DIR": "../../logs",
         "NAME_FORMAT": "[go.]YYYY-MM-DD[.log]"
