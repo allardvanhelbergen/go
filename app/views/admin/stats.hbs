@@ -31,16 +31,16 @@
                 <tr>
                     <th class="text-center col-md-1">#</th>
                     <th class="text-center">Short URI</th>
-                    <th class="text-center col-md-6">Long URI</th>
-                    {{!-- <th class="text-center">Owner</th> --}}
-                    <th class="text-center col-md-2">Redirects</th>
+                    <th class="text-center col-md-5">Long URI</th>
+                    <th class="text-center col-md-1">Owner</th>
+                    <th class="text-center col-md-1">Redirects</th>
                 </tr>
                 {{#each topGoLinks}}
                     <tr>
                         <td class="text-right">{{position}}</td>
-                        <td><a href="/{{shortUri}}" title="">{{shortUri}}</a></td>
-                        <td class="table-cell--ellipsis"><a href="/{{shortUri}}" title="">{{longUri}}</a></td>
-                        {{!-- <td>{{owner}}</td> --}}
+                        <td><a href="/{{goLink.shortUri}}">{{goLink.shortUri}}</a></td>
+                        <td class="table-cell--ellipsis"><a href="/{{goLink.shortUri}}/">{{goLink.longUri}}</a></td>
+                        <td><a href="mailto:{{owner.email}}">{{owner.name}}</a></td>
                         <td class="text-right">{{redirectCount}}</td>
                     </tr>
                 {{/each}}

@@ -6,7 +6,7 @@ var numeral = require('numeral');
 
 var GoLinkModel = require('../models/goLinkModel');
 var RedirectLogModel = require('../models/redirectLogModel');
-// var UserModel = require('../models/UserModel');
+var UserModel = require('../models/userModel');
 
 
 var AVG_NR_WORKDAYS = 220;  // days per annum
@@ -47,15 +47,13 @@ exports.saved = function(req, res, next) {
 exports.stats = function(req, res, next) {
     async.parallel({
         totalRedirects: function(callback) {
-            RedirectLogModel.count({}).exec(callback);
+            RedirectLogModel.count().exec(callback);
         },
         totalGoLinks: function(callback) {
-            GoLinkModel.count({}).exec(callback);
+            GoLinkModel.count().exec(callback);
         },
         totalUsers: function(callback) {
-            // TODO(allard): Getting duplicate model error?!
-            // UserModel.count({}).exec(callback);
-            return callback(0);
+            UserModel.count().exec(callback);
         },
         topGoLinks: function(callback) {
             async.waterfall([
@@ -73,9 +71,23 @@ exports.stats = function(req, res, next) {
                             var i = links.indexOf(link);
                             GoLinkModel.findById(link._id, function(err, doc) {
                                 links[i].position = i + 1;  // Starts at 0.
-                                links[i].shortUri = doc.shortUri;
-                                links[i].longUri = doc.longUri;
-                                links[i].ownerId = doc.ownerId;
+                                links[i].goLink = doc;
+
+                                done(err);
+                            });
+                        },
+                        function(err) {
+                            next(err, links);
+                        }
+                    );
+                },
+                function(links, next) {
+                    async.each(
+                        links,
+                        function(link, done) {
+                            var i = links.indexOf(link);
+                            UserModel.findById(link.goLink.ownerId, function(err, doc) {
+                                links[i].owner = doc;
 
                                 done(err);
                             });
@@ -85,24 +97,6 @@ exports.stats = function(req, res, next) {
                         }
                     );
                 }
-                // for each link get user details per user id
-                // TODO(allard): Add this when figured out User model bug.
-                // function(links, next) {
-                //     async.each(
-                //         links,
-                //         function(link, done) {
-                //             var i = links.indexOf(link);
-                //             UserModel.findById(link.ownerId, function(err, doc) {
-                //                 links[i].owner = doc;
-
-                //                 done(err);
-                //             });
-                //         },
-                //         function(err) {
-                //             next(err, links);
-                //         }
-                //     );
-                // }
             ], function(err, links) {
                 return callback(err, links);
             });
@@ -116,7 +110,6 @@ exports.stats = function(req, res, next) {
         result.totalRedirects = numeral(result.totalRedirects).format('0,0');
         result.totalGoLinks = numeral(result.totalGoLinks).format('0,0');
         result.totalUsers = numeral(result.totalUsers).format('0,0');
-        console.log(result);
         res.render('admin/stats', result);
     });
 };
