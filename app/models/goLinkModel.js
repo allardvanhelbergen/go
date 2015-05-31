@@ -22,7 +22,7 @@ var GoLinkSchema = new mongoose.Schema({
     ownerId: {
         type: mongoose.Schema.Types.ObjectId,
         default: null,
-        ref: 'User',
+        ref: 'users',
         required: true
     },
     created: {

@@ -2,13 +2,25 @@
 
 var util = require('util');
 var winston = require('winston');
+
+var GoLinkModel = require('../models/goLinkModel');
 var RedirectLogModel = require('../models/redirectLogModel');
+
 
 /**
  * GET: the home page.
  */
-exports.index = function(req, res) {
-    res.render('index');
+exports.index = function(req, res, next) {
+    GoLinkModel.find()
+        .sort({shortUri: 1})
+        .populate('ownerId')
+        .exec(function(err, goLinks) {
+            if (err) {
+                return next(err);
+            }
+
+            res.render('index', {goLinks: goLinks});
+        });
 };
 
 

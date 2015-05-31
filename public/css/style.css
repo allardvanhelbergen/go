@@ -30,3 +30,7 @@
 .container--main {
     margin-bottom: 60px
 }
+
+.v-space {
+    margin: 60px;
+}

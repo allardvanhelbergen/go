@@ -8,7 +8,7 @@ var RedirectLogSchema = new mongoose.Schema({
     goLinkId: {
         type: mongoose.Schema.Types.ObjectId,
         default: null,
-        ref: 'GoLink',
+        ref: 'golinks',
         required: true
     },
     redirected: {
