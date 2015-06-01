@@ -1,26 +1,66 @@
 'use strict';
 
+var async = require('async');
 var util = require('util');
 var winston = require('winston');
 
 var GoLinkModel = require('../models/goLinkModel');
 var RedirectLogModel = require('../models/redirectLogModel');
+var UserModel = require('../models/userModel');
 
 
 /**
  * GET: the home page.
  */
 exports.index = function(req, res, next) {
-    GoLinkModel.find()
-        .sort({shortUri: 1})
-        .populate('ownerId')
-        .exec(function(err, goLinks) {
-            if (err) {
-                return next(err);
+    async.parallel({
+        goLinks: function(callback) {
+            GoLinkModel.find()
+                .sort({shortUri: 1})
+                .populate('ownerId')
+                .exec(callback);
+        },
+        myLinks: function(callback) {
+            if (!req.isAuthenticated()) {
+                return callback();  // Do nothing if there is no user.
             }
 
-            res.render('index', {goLinks: goLinks});
-        });
+            async.waterfall([
+                function(callback) {
+                    UserModel.findOne({email: req.user._json.email})
+                        .exec(callback);
+                },
+                function(user, callback) {
+                    GoLinkModel.find({ownerId: user.id})
+                        .sort({shortUri: 1})
+                        .exec(callback);
+                },
+                function(myLinks, callback) {
+                    // call map here
+                    async.each(myLinks, function(link, done) {
+                        var i = myLinks.indexOf(link);
+                        RedirectLogModel.count({goLinkId: link.id})
+                            .exec(function(err, count) {
+                                myLinks[i].redirects = count;
+                                done();
+                            });
+                    }, function(err) {
+                        callback(err, myLinks);
+                    });
+                }
+            ], function(err, result) {
+                callback(err, result);
+            });
+        }
+    },
+    function(err, results) {
+        if (err) {
+            // TODO(allard): DB errors
+            return next(err);
+        }
+
+        res.render('index', results);
+    });
 };
 
 
