@@ -1,5 +1,15 @@
 <h1>Lost in 404 Space</h1>
 <p>Danger, Will Robinson! Danger! '{{path}}' doesn't compute.</p>
-<p>
-    <a href="/">Perhaps you want to create it?</a>
-</p>
+<p><strong>Perhaps you want to create it?</strong></p>
+
+<div class="v-space"></div>
+
+<div class="row">
+    <div class="col-lg-9 col--center">
+        {{#if user}}
+            {{> go-link-panel}}
+        {{else}}
+            {{> login-panel}}
+        {{/if}}
+    </div>
+</div>

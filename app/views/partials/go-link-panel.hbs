@@ -1,0 +1,41 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h1 class="panel-title">Create a new Go link</h1>
+    </div>
+    <div class="panel-body">
+        <form role="form" method="post" action="/_api/go-link">
+            <div class="form-group">
+                <label for="longUri">
+                    Paste the original URL here
+                </label>
+                <input
+                        autocomplete="off"
+                        autofocus
+                        class="form-control"
+                        name="longUri"
+                        placeholder="http://dogr.io/wowgo/suchlongurl/nowmuchshort/amaze.png"
+                        required
+                        type="url">
+            </div>
+            <div class="form-group">
+                <label for="shortUri">
+                    Enter the short URL you want
+                </label>
+                <div class="input-group">
+                    <span class="input-group-addon"><strong>go /</strong></span>
+                    <input
+                            autocomplete="off"
+                            class="form-control"
+                            name="shortUri"
+                            pattern="[a-z0-9\-]+"
+                            placeholder="suchwow  (letters-numbers-dashes-only)"
+                            required
+                            type="text">
+                </div>
+            </div>
+            <button id="submitCreateLink" type="submit" class="btn btn-primary">
+                Create Go link!
+            </button>
+        </form>
+    </div>
+</div>
