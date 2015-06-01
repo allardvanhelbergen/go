@@ -1,5 +1,6 @@
 {
     "app": {
+        "BASE_HREF": "",
         "TITLE": "DevGo/"
     },
     "passport": {

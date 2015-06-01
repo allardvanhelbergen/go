@@ -75,8 +75,8 @@
                     </tr>
                     {{#each myLinks}}
                         <tr>
-                            <td><a href="/{{shortUri}}">{{shortUri}}</a></td>
-                            <td class="table-cell--ellipsis"><a href="/{{shortUri}}/">{{longUri}}</a></td>
+                            <td><a href="{{../config.app.BASE_HREF}}/{{shortUri}}">{{shortUri}}</a></td>
+                            <td class="table-cell--ellipsis"><a href="{{../config.app.BASE_HREF}}/{{shortUri}}/">{{longUri}}</a></td>
                             <td class="text-right">{{redirects}}</a></td>
                         </tr>
                     {{/each}}
@@ -100,8 +100,8 @@
                 </tr>
                 {{#each goLinks}}
                     <tr>
-                        <td><a href="/{{shortUri}}">{{shortUri}}</a></td>
-                        <td class="table-cell--ellipsis"><a href="/{{shortUri}}/">{{longUri}}</a></td>
+                        <td><a href="{{../config.app.BASE_HREF}}/{{shortUri}}">{{shortUri}}</a></td>
+                        <td class="table-cell--ellipsis"><a href="{{../config.app.BASE_HREF}}/{{shortUri}}/">{{longUri}}</a></td>
                         <td><a href="mailto:{{ownerId.email}}">{{ownerId.name}}</a></td>
                     </tr>
                 {{/each}}

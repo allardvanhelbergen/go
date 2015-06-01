@@ -5,6 +5,7 @@
 'use strict';
 
 
+var config = require('../../config');
 var util = require('util');
 var winston = require('winston');
 var GoLinkModel = require('../models/goLinkModel');
@@ -60,8 +61,9 @@ exports.create = function(req, res, next) {
                 winston.info('Did not add duplicate goLink', util.inspect(req.body.shortUri));
                 req.flash(
                     'error',
-                    'Space Administration indicates <a class="alert-link" href="/%s">go/%s</a> is already taken. ' +
+                    'Space Administration indicates <a class="alert-link" href="%s/%s">go/%s</a> is already taken. ' +
                             'Please try another.',
+                    config.app.BASE_HREF,
                     req.body.shortUri,
                     req.body.shortUri);
                 return res.redirect('/');
@@ -74,7 +76,8 @@ exports.create = function(req, res, next) {
         req.flash(
             'success',
             '3... 2... 1... 0... We have ignition! We have lift off!!!&nbsp;&nbsp;' +
-                    '<a class="alert-link" href="/%s">go/%s</a>',
+                    '<a class="alert-link" href="%s/%s">go/%s</a>',
+            config.app.BASE_HREF,
             req.body.shortUri,
             req.body.shortUri);
         return res.redirect('/');
