@@ -82,10 +82,11 @@ exports.redirect = function(req, res, next) {
             winston.error('Error saving to redirect logs.', util.inspect(err));
         }
 
-        winston.info('Updated redirect log.', util.inspect(doc));
+        winston.info('Updated redirect log.');
+        winston.debug(util.inspect(doc));
     });
 
     // Redirect
-    winston.info('Redirecting:', util.inspect(req.goLink));
+    winston.info('Redirecting:', util.inspect(req.goLink.longUri));
     res.redirect(req.goLink.longUri);
 };

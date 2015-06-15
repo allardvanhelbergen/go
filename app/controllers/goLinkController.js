@@ -72,7 +72,8 @@ exports.create = function(req, res, next) {
             }
         }
 
-        winston.info('Added goLink', util.inspect(link));
+        winston.info('Added goLink', link.shortUri, link.longUri);
+        winston.debug(util.inspect(link));
         req.flash(
             'success',
             '3... 2... 1... 0... We have ignition! We have lift off!!!&nbsp;&nbsp;' +
