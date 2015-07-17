@@ -3,6 +3,7 @@
 
 var Q = require('q');
 var UserModel = require('../models/userModel');
+var winston = require('winston');
 
 
 exports.createOrUpdate = function(req, res, next) {
@@ -32,6 +33,11 @@ exports.createOrUpdate = function(req, res, next) {
             })
             .done(function(doc) {
                 // TODO(allard): should this go somewhere else? It would be better to call the user ID from session.
+                // This log is temporary to figure out the bug where doc is null
+                if (!doc) {
+                    winston.error('doc is apparently null...');
+                    winston.error(doc, req, res, query, update);
+                }
                 res.locals.bwUser = req.bwUser = doc._doc;
                 return next();
             });
