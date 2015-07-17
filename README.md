@@ -1,21 +1,23 @@
 # Go/
 
 Go is an internal custom URL creator/redirector.
-It allows you to make personal and memorable short URLs for longer, immemorable, crappy ones.
+It allows you to make personal and memorable short URLs to replace longer, immemorable, crappy ones.
 
-You can (soon) find the live version at [go/](http://go/).
+See the live version at [http://go/](http://go/).
 
 
 ## Development
 
 ### Prerequisites
 
-You must have MongoDB installed. Use Homebrew to install it.
+You must have MongoDB set up.
+ - Use [Homebrew](http://brew.sh/) to install it.
+ - Create a folder called `data` in the root directory of your machine.
 
 ### Installing and Running
 
 - Clone this repository.
-- Copy an environment template file from `envTemplates/` to `.env` e.g. `cp envTemplates/development .env`.
+- Copy an environment template file from `envTemplates/` to `.env`, e.g. `cp envTemplates/development .env`.
 - Set up the OAuth
     - Head to [Google's Developer Console](http://console.developers.google.com/)
     - Create a project called "Go URL Shortener" (or whatever)
